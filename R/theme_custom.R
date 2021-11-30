@@ -33,6 +33,9 @@ theme_custom <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
   base_line_size <- base_size/50
   base_rect_size <- base_size/50
 
+  # Update the geom sizes based on the plot scaling
+  geom_scaling(scale_factor = base_scale)
+
   # Apply the font scale to the font size
   font_size <- base_size*font_scale
 

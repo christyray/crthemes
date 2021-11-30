@@ -16,6 +16,32 @@ test_that("theme_custom is applied", {
   )
 })
 
+test_that("symbol font is used when requested", {
+  if (requireNamespace("scales", quietly = TRUE)) {
+    df <- data.frame(
+      x = 1:5,
+      y = 1:5,
+      z = c("alpha", "beta", "alpha", "gamma", "beta")
+    )
+    p <- ggplot(df, aes(x, y, color = z)) +
+      geom_point() +
+      scale_color_discrete(labels = scales::label_parse())
+
+    systemfonts::clear_registry()
+
+    expect_snapshot_plot("symbols are system default font",
+                         p + theme_custom(symbol = FALSE)
+    )
+
+    expect_snapshot_plot("symbols are theme font",
+                         p + theme_custom(symbol = TRUE)
+    )
+
+  } else {
+    skip("scales package not available.")
+  }
+})
+
 test_that("plot and font scaling is correct", {
   df <- data.frame(x = 1:5, y = 1:5, z = c("a", "a", "b", "b", "a"))
   p <- ggplot(df, aes(x, y, color = z)) +
@@ -41,7 +67,7 @@ test_that("plot and font scaling is correct", {
 
   expect_snapshot_plot("plot and font are small, font is scaled",
     p + theme_custom(base_scale = 2/3),
-    width = 4, height = 3
+    width = 4, height = 2.667
   )
 
   expect_snapshot_plot("normal plot with large font",
@@ -56,7 +82,7 @@ test_that("plot and font scaling is correct", {
 
   expect_snapshot_plot("small plot with normal font",
     p + theme_custom(base_scale = 2/3, font_scale = 1.5),
-    width = 4, height = 3
+    width = 4, height = 2.667
   )
 
   expect_snapshot_plot("large plot with normal font",
@@ -64,30 +90,4 @@ test_that("plot and font scaling is correct", {
     width = 9, height = 6
   )
 
-})
-
-test_that("symbol font is used when requested", {
-  if (requireNamespace("scales", quietly = TRUE)) {
-    df <- data.frame(
-      x = 1:5,
-      y = 1:5,
-      z = c("alpha", "beta", "alpha", "gamma", "beta")
-    )
-    p <- ggplot(df, aes(x, y, color = z)) +
-      geom_point() +
-      scale_color_discrete(labels = scales::label_parse())
-
-    systemfonts::clear_registry()
-
-    expect_snapshot_plot("symbols are system default font",
-      p + theme_custom(symbol = FALSE)
-    )
-
-    expect_snapshot_plot("symbols are theme font",
-      p + theme_custom(symbol = TRUE)
-    )
-
-  } else {
-    skip("scales package not available.")
-  }
 })
