@@ -15,13 +15,18 @@
 #'   value of 1 will scale the font to the plot size. Larger numbers make the
 #'   font large compared to the plot size; smaller numbers make the font small
 #'   compared to the plot size.
+#' @param symbol Should the theme overwrite the system default Symbol font with
+#'   the theme default font? If \code{TRUE}, \code{theme_custom()} will
+#'   overwrite the Symbol font, and this change will persist until the end of
+#'   the R session or until
+#'   \code{\link[systemfonts:register_font]{clear_registry()}} is used.
 #'
 #' @return A list containing the theme properties.
 #' @export
 #' @importFrom ggplot2 theme_gray %+replace% theme element_line element_rect
 #'   element_text element_blank margin rel
 #' @importFrom grid unit
-theme_custom <- function(base_scale = 1, font_scale = 1) {
+theme_custom <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
 
   # Define sizing based on input scale
   base_size <- base_scale*12
@@ -34,7 +39,8 @@ theme_custom <- function(base_scale = 1, font_scale = 1) {
   base_colour <- "gray20"
   base_colour_light <- "gray80"
 
-  base_family <- ""
+  define_fonts(symbol = symbol)
+  base_family <- "Roboto Plot"
 
   theme_gray() %+replace%
     theme(

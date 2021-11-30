@@ -4,7 +4,7 @@
 \alias{theme_custom}
 \title{Base customized theme}
 \usage{
-theme_custom(base_scale = 1, font_scale = 1)
+theme_custom(base_scale = 1, font_scale = 1, symbol = TRUE)
 }
 \arguments{
 \item{base_scale}{Scaling factor for the plot as a whole. A value of 1
@@ -14,6 +14,12 @@ corresponds to a font size of 12 pt.}
 value of 1 will scale the font to the plot size. Larger numbers make the
 font large compared to the plot size; smaller numbers make the font small
 compared to the plot size.}
+
+\item{symbol}{Should the theme overwrite the system default Symbol font with
+the theme default font? If \code{TRUE}, \code{theme_custom()} will
+overwrite the Symbol font, and this change will persist until the end of
+the R session or until
+\code{\link[systemfonts:register_font]{clear_registry()}} is used.}
 }
 \value{
 A list containing the theme properties.

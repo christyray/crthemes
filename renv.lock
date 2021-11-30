@@ -473,6 +473,19 @@
       "RemoteSha": "1.6.0",
       "Hash": "32620e2001c1dce1af49c49dccbb9420"
     },
+    "ragg": {
+      "Package": "ragg",
+      "Version": "1.2.0",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "ragg",
+      "RemoteRef": "ragg",
+      "RemoteRepos": "https://cran.rstudio.com/",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.2.0",
+      "Hash": "5755f91f5fb68fb8cb8a3cf78808222e"
+    },
     "rematch2": {
       "Package": "rematch2",
       "Version": "2.1.2",
@@ -545,6 +558,19 @@
       "RemoteSha": "1.1.1",
       "Hash": "6f76f71042411426ec8df6c54f34e6dd"
     },
+    "systemfonts": {
+      "Package": "systemfonts",
+      "Version": "1.0.3",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "systemfonts",
+      "RemoteRef": "systemfonts",
+      "RemoteRepos": "https://cran.rstudio.com/",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.0.3",
+      "Hash": "5be9fcf8ef6763e8cb13ab009e273a1d"
+    },
     "testthat": {
       "Package": "testthat",
       "Version": "3.1.0",
@@ -557,6 +583,19 @@
       "RemotePkgPlatform": "macos",
       "RemoteSha": "3.1.0",
       "Hash": "89e55ebe4f5ddd7f43f0f2bc6d96c950"
+    },
+    "textshaping": {
+      "Package": "textshaping",
+      "Version": "0.3.6",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "textshaping",
+      "RemoteRef": "textshaping",
+      "RemoteRepos": "https://cran.rstudio.com/",
+      "RemotePkgPlatform": "macos",
+      "RemoteSha": "0.3.6",
+      "Hash": "1ab6223d3670fac7143202cb6a2d43d5"
     },
     "tibble": {
       "Package": "tibble",

@@ -17,8 +17,10 @@ URL: https://github.com/cpicker4/crthemes
 BugReports: https://github.com/cpicker4/crthemes/issues
 Imports: 
     ggplot2,
-    grid
+    grid,
+    systemfonts
 Suggests: 
+    scales,
     ragg,
     testthat (>= 3.0.0),
     vdiffr
