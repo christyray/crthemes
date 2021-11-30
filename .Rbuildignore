@@ -2,3 +2,4 @@
 ^renv\.lock$
 ^crthemes\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
