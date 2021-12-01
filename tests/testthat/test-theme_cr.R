@@ -1,17 +1,17 @@
 library(ggplot2)
 
-test_that("theme_custom runs", {
-  expect_s3_class(theme_custom(), "theme")
+test_that("theme_cr runs", {
+  expect_s3_class(theme_cr(), "theme")
 })
 
 # Visual Tests ------------------------------------------------------------
 
-test_that("theme_custom is applied", {
+test_that("theme_cr is applied", {
   df <- data.frame(x = 1:5, y = 1:5)
   p <- ggplot(df, aes(x, y)) +
     geom_point() +
-    theme_custom()
-  expect_doppelganger("theme_custom",
+    theme_cr()
+  expect_doppelganger("theme_cr",
     p
   )
 })
@@ -30,11 +30,11 @@ test_that("symbol font is used when requested", {
     systemfonts::clear_registry()
 
     expect_snapshot_plot("symbols are system default font",
-                         p + theme_custom(symbol = FALSE)
+                         p + theme_cr(symbol = FALSE)
     )
 
     expect_snapshot_plot("symbols are theme font",
-                         p + theme_custom(symbol = TRUE)
+                         p + theme_cr(symbol = TRUE)
     )
 
   } else {
@@ -56,37 +56,37 @@ test_that("plot and font scaling is correct", {
     )
 
   expect_snapshot_plot("plot and font are default size",
-    p + theme_custom(),
+    p + theme_cr(),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("plot and font are large, font is scaled",
-    p + theme_custom(base_scale = 1.5),
+    p + theme_cr(base_scale = 1.5),
     width = 9, height = 6
   )
 
   expect_snapshot_plot("plot and font are small, font is scaled",
-    p + theme_custom(base_scale = 2/3),
+    p + theme_cr(base_scale = 2/3),
     width = 4, height = 2.667
   )
 
   expect_snapshot_plot("normal plot with large font",
-    p + theme_custom(base_scale = 1, font_scale = 1.5),
+    p + theme_cr(base_scale = 1, font_scale = 1.5),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("normal plot with small font",
-    p + theme_custom(base_scale = 1, font_scale = 2/3),
+    p + theme_cr(base_scale = 1, font_scale = 2/3),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("small plot with normal font",
-    p + theme_custom(base_scale = 2/3, font_scale = 1.5),
+    p + theme_cr(base_scale = 2/3, font_scale = 1.5),
     width = 4, height = 2.667
   )
 
   expect_snapshot_plot("large plot with normal font",
-    p + theme_custom(base_scale = 1.5, font_scale = 2/3),
+    p + theme_cr(base_scale = 1.5, font_scale = 2/3),
     width = 9, height = 6
   )
 
