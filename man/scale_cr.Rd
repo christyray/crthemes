@@ -29,7 +29,8 @@ scale_fill_cr(
 colors from; use \code{\link{pal_names}()} to see a list of available
 palettes}
 
-\item{ncol}{Number of colors to select from \code{palette}; can only use one
+\item{ncol}{Range of colors to select from \code{palette}; if only one number
+is provided, it will be the number of colors selected; can only use one
 selection technique}
 
 \item{colors}{Names of colors to select from \code{palette}, given as a

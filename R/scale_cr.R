@@ -75,7 +75,7 @@ scale_fill_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
   )
 
   if (!is.null(names)) {
-    ggplot2::scale_color_manual(values = pal_cr, ...)
+    ggplot2::scale_fill_manual(values = pal_cr, ...)
   } else {
     ggplot2::discrete_scale(
       "fill",

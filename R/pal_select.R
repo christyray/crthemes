@@ -10,7 +10,8 @@
 #' @param palette Character vector of length 1 defining the palette to select
 #'   colors from; use \code{\link{pal_names}()} to see a list of available
 #'   palettes
-#' @param ncol Number of colors to select from \code{palette}; can only use one
+#' @param ncol Range of colors to select from \code{palette}; if only one number
+#'   is provided, it will be the number of colors selected; can only use one
 #'   selection technique
 #' @param colors Names of colors to select from \code{palette}, given as a
 #'   character vector; can only use one selection technique
@@ -31,6 +32,7 @@
 #' @examples
 #' pal_select("receptors")
 #' pal_select("receptors", ncol = 3)
+#' pal_select("receptors", ncol = c(2,5))
 #' pal_select("receptors", colors = c("lightred", "red", "orange"))
 #' pal_select("receptors", names = c("IL8", "IL8R", "IL8R-Ab"))
 
@@ -44,7 +46,10 @@ pal_select <- function(palette = names(pal), ncol = NULL, colors = NULL,
       "Can only provide values for one of `ncol`, `colors`, or `names`"
     )
   } else if (!is.null(ncol)) {
-    pal_out <- pal[[palette]][["colors"]][1:ncol, c("color", "hex")]
+    if (length(ncol) == 1) {
+      ncol <- c(1,ncol)
+    }
+    pal_out <- pal[[palette]][["colors"]][ncol[1]:ncol[2], c("color", "hex")]
   } else if (!is.null(colors)) {
     pal_out <- dplyr::filter(
       pal[[palette]][["colors"]],
@@ -77,7 +82,7 @@ pal_select <- function(palette = names(pal), ncol = NULL, colors = NULL,
   pal_out <- tibble::deframe(pal_out)
 
   # Apply provided alpha value
-  scales::alpha(pal_out, alpha)
+  return(scales::alpha(pal_out, alpha))
 }
 
 #' Check if the palette argument is formatted correctly

@@ -17,7 +17,8 @@ pal_select(
 colors from; use \code{\link{pal_names}()} to see a list of available
 palettes}
 
-\item{ncol}{Number of colors to select from \code{palette}; can only use one
+\item{ncol}{Range of colors to select from \code{palette}; if only one number
+is provided, it will be the number of colors selected; can only use one
 selection technique}
 
 \item{colors}{Names of colors to select from \code{palette}, given as a
@@ -47,6 +48,7 @@ the function will return the full color palette with color names.
 \examples{
 pal_select("receptors")
 pal_select("receptors", ncol = 3)
+pal_select("receptors", ncol = c(2,5))
 pal_select("receptors", colors = c("lightred", "red", "orange"))
 pal_select("receptors", names = c("IL8", "IL8R", "IL8R-Ab"))
 }

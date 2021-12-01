@@ -48,6 +48,7 @@ pal_preview <- function(palette = names(pal), ncol = NULL, colors = NULL,
   )[[label]]
 
   show_col(pal_cr, labels = labels, columns = columns)
+  invisible("")
 }
 
 #' @rdname pal_preview
