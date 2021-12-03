@@ -19,7 +19,7 @@
 #' p + scale_color_cr(palette = "receptors")
 #'
 #' # Matching the colors to the species names
-#' p + scale_color_cr(palette = "receptors", names = unique(df$z))
+#' p + scale_color_cr(palette = "receptors", species = unique(df$z))
 #'
 #' @name scale_cr
 NULL
@@ -27,7 +27,7 @@ NULL
 #' @rdname scale_cr
 #' @export
 scale_color_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
-                           names = NULL, alpha = 1, ...) {
+                           species = NULL, alpha = 1, ...) {
 
   if (!is.character(palette)) {
     stop("`palette` must be a character vector specifying a color palette
@@ -39,11 +39,11 @@ scale_color_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
     palette,
     ncol = ncol,
     colors = colors,
-    names = names,
+    species = species,
     alpha = alpha
   )
 
-  if (!is.null(names)) {
+  if (!is.null(species)) {
     ggplot2::scale_color_manual(values = pal_cr, ...)
   } else {
     ggplot2::discrete_scale(
@@ -58,7 +58,7 @@ scale_color_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
 #' @rdname scale_cr
 #' @export
 scale_fill_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
-                           names = NULL, alpha = 1, ...) {
+                           species = NULL, alpha = 1, ...) {
 
   if (!is.character(palette)) {
     stop("`palette` must be a character vector specifying a color palette
@@ -70,11 +70,11 @@ scale_fill_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
     palette,
     ncol = ncol,
     colors = colors,
-    names = names,
+    species = species,
     alpha = alpha
   )
 
-  if (!is.null(names)) {
+  if (!is.null(species)) {
     ggplot2::scale_fill_manual(values = pal_cr, ...)
   } else {
     ggplot2::discrete_scale(

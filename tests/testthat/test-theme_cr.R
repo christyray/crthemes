@@ -16,32 +16,6 @@ test_that("theme_cr is applied", {
   )
 })
 
-test_that("symbol font is used when requested", {
-  if (requireNamespace("scales", quietly = TRUE)) {
-    df <- data.frame(
-      x = 1:5,
-      y = 1:5,
-      z = c("alpha", "beta", "alpha", "gamma", "beta")
-    )
-    p <- ggplot(df, aes(x, y, color = z)) +
-      geom_point() +
-      scale_color_discrete(labels = scales::label_parse())
-
-    systemfonts::clear_registry()
-
-    expect_snapshot_plot("symbols are system default font",
-                         p + theme_cr(symbol = FALSE)
-    )
-
-    expect_snapshot_plot("symbols are theme font",
-                         p + theme_cr(symbol = TRUE)
-    )
-
-  } else {
-    skip("scales package not available.")
-  }
-})
-
 test_that("plot and font scaling is correct", {
   df <- data.frame(x = 1:5, y = 1:5, z = c("a", "a", "b", "b", "a"))
   p <- ggplot(df, aes(x, y, color = z)) +

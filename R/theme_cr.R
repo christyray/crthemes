@@ -10,16 +10,24 @@
 #' in a completely custom theme. It uses the packaged fonts by default.
 #'
 #' @param base_scale Scaling factor for the plot as a whole. A value of 1
-#'   corresponds to a font size of 12 pt.
+#'   corresponds to a font size of 12 pt and a figure size of 6" by 4"
 #' @param font_scale Scaling factor for the font as compared to the plot. A
 #'   value of 1 will scale the font to the plot size. Larger numbers make the
 #'   font large compared to the plot size; smaller numbers make the font small
 #'   compared to the plot size.
+#' @param font Font family to be used in the theme, given as character vector.
+#'   The font must be included in the theme fonts; use
+#'   \code{\link{font_names}()} to see a list of included fonts and
+#'   \code{\link{font_preview}()} to preview a selected font.
 #' @param symbol Should the theme overwrite the system default Symbol font with
-#'   the theme default font? If \code{TRUE}, \code{theme_cr()} will
-#'   overwrite the Symbol font, and this change will persist until the end of
-#'   the R session or until
-#'   \code{\link[systemfonts:register_font]{clear_registry()}} is used.
+#'   the theme default font? If \code{TRUE}, \code{theme_cr()} will overwrite
+#'   the Symbol font, and this change will persist until the end of the R
+#'   session or until \code{\link[systemfonts:register_font]{clear_registry()}}
+#'   is used.
+#' @param cairo Is a cairographics device being used to save the figure? ("pdf"
+#'   and "eps" filetypes) Cairo does not use the font registration from the
+#'   \code{\link[systemfonts]{systemfonts}} package, so an alternate cairo-safe
+#'   font must be provided and the normal font registration will be skipped.
 #'
 #' @return A list containing the theme properties.
 #'
@@ -27,7 +35,38 @@
 #'   element_text element_blank margin rel
 #' @importFrom grid unit
 #' @export
-theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
+#'
+#' @examples
+#' library(ggplot2)
+#'
+#' df <- data.frame(x = 1:5, y = 1:5, z = c("a", "b", "c", "b", "c"))
+#' p <- ggplot(df, aes(x, y, color = z)) + geom_point()
+#'
+#'\dontrun{
+#' p + theme_cr() # Uses default scaling and font
+#' p + theme_cr(font = "Roboto Medium") # Bolder font
+#' p + theme_cr(base_scale = 2) # Multiply height and width of the plot by 2
+#' p + theme_cr(font = "Roboto Medium", symbol = FALSE) # Use system Symbol font
+#' p + theme_cr(font = "Avenir", cairo = TRUE) # Use a cairo-safe font
+#'}
+
+theme_cr <- function(base_scale = 1, font_scale = 1,
+                     font = "Roboto Regular", symbol = TRUE, cairo = FALSE) {
+
+  # Import fonts from the font folder
+  if (cairo == FALSE) {
+    font_register()
+
+    # Register Symbol font if requested
+    if (symbol == TRUE) {
+      symbol_register(font)
+    }
+    # Check that selected font is registered
+    font <- match.arg(font, choices = font_names())
+  } else {
+    # Skip font import if using cairographics device
+    font = font
+  }
 
   # Define sizing based on input scale
   base_size <- base_scale*12
@@ -41,10 +80,8 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
   font_size <- base_size*font_scale
 
   base_colour <- "gray20"
+  base_colour_medium <- "gray30"
   base_colour_light <- "gray80"
-
-  define_fonts(symbol = symbol)
-  base_family <- "Roboto Plot"
 
   theme_gray() %+replace%
     theme(
@@ -61,7 +98,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
         linetype = 1
       ),
       text = element_text(
-        family = base_family,
+        family = font,
         face = "plain",
         colour = base_colour,
         size = font_size,
@@ -79,8 +116,8 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
         lineend = "butt"
       ),
       axis.text = element_text(
-        size = rel(0.85),
-        color = base_colour
+        size = rel(0.9),
+        color = base_colour_medium
       ),
       axis.text.x = element_text(
         margin = margin(t = font_size/4),
@@ -101,7 +138,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
       axis.ticks = element_line(colour = base_colour),
       axis.ticks.length = unit(font_size/4, "pt"),
       axis.title = element_text(
-        size = rel(1.05),
+        size = rel(1.1),
         face = "bold",
         colour = base_colour),
       axis.title.x = element_text(
@@ -133,8 +170,13 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
         colour = "transparent"
       ),
       legend.key.size = unit(font_size*1.6, "pt"),
-      legend.text = element_text(size = rel(0.85)),
-      legend.title = element_text(size = rel(1.05), face = "bold", hjust = 0),
+      legend.text = element_text(size = rel(0.9), color = base_colour_medium),
+      legend.title = element_text(
+        size = rel(1.1),
+        color = base_colour,
+        face = "bold",
+        hjust = 0
+      ),
       legend.position = "right",
       legend.justification = "center",
       legend.box = NULL,
@@ -172,7 +214,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
       strip.switch.pad.wrap = unit(font_size/4, "pt"),
 
       plot.background = element_rect(
-        fill = "transparent",
+        fill = "white",
         color = "transparent"
       ),
       plot.title = element_text(
@@ -203,8 +245,6 @@ theme_cr <- function(base_scale = 1, font_scale = 1, symbol = TRUE) {
         vjust = 0.5
       ),
       plot.tag.position = "topleft",
-      plot.margin = margin(font_size, font_size, font_size, font_size),
-
-      complete = TRUE
+      plot.margin = margin(font_size, font_size, font_size, font_size)
     )
 }

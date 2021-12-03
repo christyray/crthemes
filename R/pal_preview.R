@@ -10,13 +10,13 @@
 #'
 #' @inheritParams pal_select
 #' @param label What text to use for the color preview labels, options are
-#'   \code{color}, \code{hex}, or \code{name}, default is \code{color}
+#'   \code{color}, \code{hex}, or \code{species}, default is \code{color}
 #' @param columns How many columns to use for the color preview, defaults to
 #'   approximately square
 #'
 #' @section Table Format:
 #'   For \code{pal_table()}: \describe{\item{\code{Name}}{The palette name, used
-#'   in the \code{pal_*()} functions.} \item{\code{Key}}{Logical value, if the
+#'   in the \code{pal_*()} functions} \item{\code{Key}}{Logical value, if the
 #'   palette is one of the main, standard palettes} \item{\code{Named}}{Logical
 #'   value, if the palette table contains a \code{name} column with species
 #'   names} \item{\code{Type}}{Factor, what category of information should be
@@ -27,17 +27,17 @@
 #' @export
 #'
 #' @examples
-#' pal_preview("antibodies", label = "name", columns = 2)
-#' pal_preview("receptors", names = c("IL6R", "IL6R-Ab"), label = "hex")
+#' pal_preview("antibodies", label = "species", columns = 2)
+#' pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), label = "hex")
 
 pal_preview <- function(palette = names(pal), ncol = NULL, colors = NULL,
-                        names = NULL, alpha = 1, label = NULL, columns = NULL) {
+                        species = NULL, alpha = 1, label = NULL, columns = NULL) {
   pal_check(palette)
 
-  label <- match.arg(label, choices = c("color", "name", "hex"))
+  label <- match.arg(label, choices = c("color", "species", "hex"))
 
   pal_cr <- pal_select(palette = palette, ncol = ncol, colors = colors,
-                           names = names, alpha = alpha)
+                           species = species, alpha = alpha)
 
   # Select only the non-alpha component of the hex code for matching
   pal_hex <- substr(pal_cr, 1, 7)
@@ -47,7 +47,7 @@ pal_preview <- function(palette = names(pal), ncol = NULL, colors = NULL,
     .data$hex %in% pal_hex
   )[[label]]
 
-  show_col(pal_cr, labels = labels, columns = columns)
+  color_preview(pal_cr, labels = labels, columns = columns)
   invisible("")
 }
 
@@ -61,12 +61,7 @@ pal_names <- function() {
 #' @export
 pal_colors <- function(palette = names(pal)) {
 
-  if (!is.character(palette)) {
-    stop("`palette` must be a character vector of length 1 specifying a color
-         palette contained in `pal`")
-  } else if (length(palette) > 1) {
-    stop("`palette` must define a single palette to use, not multiple")
-  }
+  pal_check(palette)
 
   pal[[palette]][["colors"]]
 }
@@ -94,7 +89,7 @@ pal_table <- function() {
 
 # Copy of the show_col function from scales package; modified to allow for
 # custom labels
-show_col <- function(colors, labels, columns) {
+color_preview <- function(colors, labels, columns) {
   n <- length(colors)
 
   # Calculate the number of columns if it was not provided

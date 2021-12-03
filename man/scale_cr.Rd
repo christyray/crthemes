@@ -10,7 +10,7 @@ scale_color_cr(
   palette = names(pal),
   ncol = NULL,
   colors = NULL,
-  names = NULL,
+  species = NULL,
   alpha = 1,
   ...
 )
@@ -19,7 +19,7 @@ scale_fill_cr(
   palette = names(pal),
   ncol = NULL,
   colors = NULL,
-  names = NULL,
+  species = NULL,
   alpha = 1,
   ...
 )
@@ -36,7 +36,7 @@ selection technique}
 \item{colors}{Names of colors to select from \code{palette}, given as a
 character vector; can only use one selection technique}
 
-\item{names}{Names of species to select from \code{palette} (e.g., "IL6" or
+\item{species}{Names of species to select from \code{palette} (e.g., "IL6" or
 "Tocilizumab"), given as a character vector; can only use one selection
 technique}
 
@@ -63,6 +63,6 @@ p <- ggplot(df, aes(x, y, color = z)) + geom_point()
 p + scale_color_cr(palette = "receptors")
 
 # Matching the colors to the species names
-p + scale_color_cr(palette = "receptors", names = unique(df$z))
+p + scale_color_cr(palette = "receptors", species = unique(df$z))
 
 }

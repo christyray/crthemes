@@ -4,22 +4,38 @@
 \alias{theme_cr}
 \title{Base customized theme}
 \usage{
-theme_cr(base_scale = 1, font_scale = 1, symbol = TRUE)
+theme_cr(
+  base_scale = 1,
+  font_scale = 1,
+  font = "Roboto Regular",
+  symbol = TRUE,
+  cairo = FALSE
+)
 }
 \arguments{
 \item{base_scale}{Scaling factor for the plot as a whole. A value of 1
-corresponds to a font size of 12 pt.}
+corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
 \item{font_scale}{Scaling factor for the font as compared to the plot. A
 value of 1 will scale the font to the plot size. Larger numbers make the
 font large compared to the plot size; smaller numbers make the font small
 compared to the plot size.}
 
+\item{font}{Font family to be used in the theme, given as character vector.
+The font must be included in the theme fonts; use
+\code{\link{font_names}()} to see a list of included fonts and
+\code{\link{font_preview}()} to preview a selected font.}
+
 \item{symbol}{Should the theme overwrite the system default Symbol font with
-the theme default font? If \code{TRUE}, \code{theme_cr()} will
-overwrite the Symbol font, and this change will persist until the end of
-the R session or until
-\code{\link[systemfonts:register_font]{clear_registry()}} is used.}
+the theme default font? If \code{TRUE}, \code{theme_cr()} will overwrite
+the Symbol font, and this change will persist until the end of the R
+session or until \code{\link[systemfonts:register_font]{clear_registry()}}
+is used.}
+
+\item{cairo}{Is a cairographics device being used to save the figure? ("pdf"
+and "eps" filetypes) Cairo does not use the font registration from the
+\code{\link[systemfonts]{systemfonts}} package, so an alternate cairo-safe
+font must be provided and the normal font registration will be skipped.}
 }
 \value{
 A list containing the theme properties.
@@ -34,4 +50,18 @@ This builds off of the \code{\link[ggplot2]{theme_gray}} function from the
 \code{\link[ggplot2]{ggplot2}} package. It overrides components of the
 \code{theme_gray} function with the function-specified components, resulting
 in a completely custom theme. It uses the packaged fonts by default.
+}
+\examples{
+library(ggplot2)
+
+df <- data.frame(x = 1:5, y = 1:5, z = c("a", "b", "c", "b", "c"))
+p <- ggplot(df, aes(x, y, color = z)) + geom_point()
+
+\dontrun{
+p + theme_cr() # Uses default scaling and font
+p + theme_cr(font = "Roboto Medium") # Bolder font
+p + theme_cr(base_scale = 2) # Multiply height and width of the plot by 2
+p + theme_cr(font = "Roboto Medium", symbol = FALSE) # Use system Symbol font
+p + theme_cr(font = "Avenir", cairo = TRUE) # Use a cairo-safe font
+}
 }

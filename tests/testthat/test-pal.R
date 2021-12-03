@@ -14,8 +14,12 @@ test_that("palette must be included in the pal data set", {
 
 test_that("pal_select() cannot use multiple selection schemes", {
   expect_error(pal_select("receptors", ncol = 1, colors = "lightblue"))
-  expect_error(pal_select("receptors", ncol = 1, names = "IL6"))
-  expect_error(pal_select("receptors", colors = "green", names = "IL8R"))
+  expect_error(pal_select("receptors", ncol = 1, species = "IL6"))
+  expect_error(pal_select("receptors", colors = "green", species = "IL8R"))
+})
+
+test_that("pal_select() accepts one number or two numbers for ncol", {
+  expect_error(pal_select("receptors", ncol = 2:4))
 })
 
 test_that("pal_select() returns hex codes corresponding to hex column", {
@@ -47,14 +51,14 @@ test_that("pal_select() uses names based on how user selected colors", {
     c("green", "orange", "yellow")
   )
   expect_named(
-    pal_select("receptors", names = c("IL6R", "IL6R-Ab", "IL6R-Ab-IL8R")),
+    pal_select("receptors", species = c("IL6R", "IL6R-Ab", "IL6R-Ab-IL8R")),
     c("IL6R", "IL6R-Ab", "IL6R-Ab-IL8R")
   )
 })
 
 test_that("pal_select() warns if wrong argument is used", {
   expect_warning(pal_select("receptors", colors = c("IL6", "IL8R")))
-  expect_warning(pal_select("receptors", names = c("yellow", "lightred")))
+  expect_warning(pal_select("receptors", species = c("yellow", "lightred")))
 })
 
 test_that("pal_select() adds alpha to hex code when requested", {
@@ -91,7 +95,7 @@ test_that("pal_table() returns a tibble with all palettes", {
 
 test_that("pal_colors() returns a tibble with color information", {
   expect_s3_class(pal_colors("receptors"), "tbl_df")
-  expect_equal(names(pal_colors("receptors")), c("name", "color", "hex"))
+  expect_equal(names(pal_colors("receptors")), c("species", "color", "hex"))
 })
 
 # pal_preview() -----------------------------------------------------------
@@ -102,19 +106,19 @@ expect_snapshot_plot("basic color matrix",
   'pal_preview("receptors")'
 )
 
-expect_snapshot_plot("names instead of colors",
-  'pal_preview("receptors", label = "name")'
+expect_snapshot_plot("species instead of colors",
+  'pal_preview("receptors", label = "species")'
 )
 
 expect_snapshot_plot("subset of colors",
   'pal_preview("receptors", ncol = 4)'
 )
 
-expect_snapshot_plot("names with subset of colors",
+expect_snapshot_plot("species with subset of colors",
   'pal_preview(
     "receptors",
-    names = c("IL8R", "IL8R-Ab", "IL6R-Ab-IL8R"),
-    label = "name"
+    species = c("IL8R", "IL8R-Ab", "IL6R-Ab-IL8R"),
+    label = "species"
   )'
 )
 
@@ -127,5 +131,5 @@ expect_snapshot_plot("change alpha",
 )
 
 expect_snapshot_plot("different palette",
-  'pal_preview("antibodies_dark", label = "name")'
+  'pal_preview("antibodies_dark", label = "species")'
 )

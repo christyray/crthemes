@@ -11,7 +11,7 @@ pal_preview(
   palette = names(pal),
   ncol = NULL,
   colors = NULL,
-  names = NULL,
+  species = NULL,
   alpha = 1,
   label = NULL,
   columns = NULL
@@ -35,7 +35,7 @@ selection technique}
 \item{colors}{Names of colors to select from \code{palette}, given as a
 character vector; can only use one selection technique}
 
-\item{names}{Names of species to select from \code{palette} (e.g., "IL6" or
+\item{species}{Names of species to select from \code{palette} (e.g., "IL6" or
 "Tocilizumab"), given as a character vector; can only use one selection
 technique}
 
@@ -44,7 +44,7 @@ values are preserved. Default is \code{1}. Uses \code{\link[scales]{alpha}()} to
 set the alpha value}
 
 \item{label}{What text to use for the color preview labels, options are
-\code{color}, \code{hex}, or \code{name}, default is \code{color}}
+\code{color}, \code{hex}, or \code{species}, default is \code{color}}
 
 \item{columns}{How many columns to use for the color preview, defaults to
 approximately square}
@@ -61,7 +61,7 @@ the \code{\link[scales]{scales}} package.
 \section{Table Format}{
 
 For \code{pal_table()}: \describe{\item{\code{Name}}{The palette name, used
-in the \code{pal_*()} functions.} \item{\code{Key}}{Logical value, if the
+in the \code{pal_*()} functions} \item{\code{Key}}{Logical value, if the
 palette is one of the main, standard palettes} \item{\code{Named}}{Logical
 value, if the palette table contains a \code{name} column with species
 names} \item{\code{Type}}{Factor, what category of information should be
@@ -71,6 +71,6 @@ Light, or Dark}}
 }
 
 \examples{
-pal_preview("antibodies", label = "name", columns = 2)
-pal_preview("receptors", names = c("IL6R", "IL6R-Ab"), label = "hex")
+pal_preview("antibodies", label = "species", columns = 2)
+pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), label = "hex")
 }

@@ -8,7 +8,7 @@ pal_select(
   palette = names(pal),
   ncol = NULL,
   colors = NULL,
-  names = NULL,
+  species = NULL,
   alpha = 1
 )
 }
@@ -24,7 +24,7 @@ selection technique}
 \item{colors}{Names of colors to select from \code{palette}, given as a
 character vector; can only use one selection technique}
 
-\item{names}{Names of species to select from \code{palette} (e.g., "IL6" or
+\item{species}{Names of species to select from \code{palette} (e.g., "IL6" or
 "Tocilizumab"), given as a character vector; can only use one selection
 technique}
 
@@ -35,13 +35,13 @@ set the alpha value}
 \value{
 A named character vector with the hex codes of the selected colors.
 Color names are given for \code{ncol} and \code{colors} selections, and
-species names are given for \code{names} selection.
+species names are given for \code{species} selection.
 }
 \description{
 This selects hex codes from the palettes defined in the internal \code{pal}
 dataset. The list of available palettes can be previewed with
 \code{\link{pal_names}()}. Subsets of colors can be selected with the
-\code{ncol}, \code{colors}, or \code{names} arguments. Only one selection
+\code{ncol}, \code{colors}, or \code{species} arguments. Only one selection
 method can be used in the function call. If no selection method is provided,
 the function will return the full color palette with color names.
 }
@@ -50,5 +50,5 @@ pal_select("receptors")
 pal_select("receptors", ncol = 3)
 pal_select("receptors", ncol = c(2,5))
 pal_select("receptors", colors = c("lightred", "red", "orange"))
-pal_select("receptors", names = c("IL8", "IL8R", "IL8R-Ab"))
+pal_select("receptors", species = c("IL8", "IL8R", "IL8R-Ab"))
 }

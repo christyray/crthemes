@@ -25,9 +25,12 @@ Imports:
     systemfonts,
     tibble,
     rlang,
-    farver
-Suggests: 
+    farver,
+    magrittr,
     ragg,
+    svglite,
+    grDevices
+Suggests: 
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3

@@ -19,11 +19,15 @@ test_that("color scale is applied to graph", {
   )
 
   expect_snapshot_plot("select colors by species name",
-    p + scale_color_cr("receptors", names = unique(df$z))
+    p + scale_color_cr("receptors", species = unique(df$z))
   )
 
   expect_snapshot_plot("select colors by number",
     p + scale_color_cr("receptors", ncol = c(2,5))
+  )
+
+  expect_snapshot_plot("can rename color legend with name argument",
+    p + scale_color_cr("receptors", name = "Species")
   )
 
   expect_snapshot_plot("alpha value modifies color",
@@ -59,11 +63,15 @@ test_that("fill scale is applied to graph", {
   )
 
   expect_snapshot_plot("select fill by species name",
-    p + scale_fill_cr("receptors", names = unique(df$x))
+    p + scale_fill_cr("receptors", species = unique(df$x))
   )
 
   expect_snapshot_plot("select fill by number",
     p + scale_fill_cr("receptors", ncol = c(2,6))
+  )
+
+  expect_snapshot_plot("can rename fill legend with name argument",
+    p + scale_fill_cr("receptors", name = "Species")
   )
 
   expect_snapshot_plot("alpha value modifies fill",

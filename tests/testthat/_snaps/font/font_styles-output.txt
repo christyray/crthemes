@@ -1,0 +1,5 @@
+"x"
+"1" "Regular"
+"2" "Bold"
+"3" "Italic"
+"4" "Bold Italic"
