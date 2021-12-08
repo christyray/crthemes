@@ -1,6 +1,21 @@
 # Empty palette list
 pal <- list()
 
+# Default -----------------------------------------------------------------
+
+color <- c("blue", "red", "green", "orange", "yellow")
+hex <- c("#544C7A", "#9C2748", "#599595", "#D96C3D", "#E6B450")
+
+pal$default$colors <- tibble::tibble(color, hex)
+pal$default$properties <- tibble::tibble(
+  "Name" = "default",
+  "Key" = TRUE,
+  "Named" = FALSE,
+  "Type" = "Default",
+  "Length" = length(hex),
+  "Brightness" = "Standard"
+)
+
 # Receptors Standard ------------------------------------------------------
 
 species <- c("IL6", "IL8", "IL6R", "IL8R",

@@ -5,7 +5,7 @@
 \title{Select from the defined color palettes}
 \usage{
 pal_select(
-  palette = names(pal),
+  palette = "default",
   ncol = NULL,
   colors = NULL,
   species = NULL,
@@ -15,7 +15,7 @@ pal_select(
 \arguments{
 \item{palette}{Character vector of length 1 defining the palette to select
 colors from; use \code{\link{pal_names}()} to see a list of available
-palettes}
+palettes, default palette is named "default"}
 
 \item{ncol}{Range of colors to select from \code{palette}; if only one number
 is provided, it will be the number of colors selected; can only use one

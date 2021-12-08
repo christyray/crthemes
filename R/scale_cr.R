@@ -26,15 +26,9 @@ NULL
 
 #' @rdname scale_cr
 #' @export
-scale_color_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
+scale_color_cr <- function(palette = "default", ncol = NULL, colors = NULL,
                            species = NULL, alpha = 1, ...) {
 
-  if (!is.character(palette)) {
-    stop("`palette` must be a character vector specifying a color palette
-          contained in `pal`")
-  }
-
-  palette <- match.arg(palette)
   pal_cr <- pal_select(
     palette,
     ncol = ncol,
@@ -57,15 +51,9 @@ scale_color_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
 
 #' @rdname scale_cr
 #' @export
-scale_fill_cr <- function(palette = names(pal), ncol = NULL, colors = NULL,
+scale_fill_cr <- function(palette = "default", ncol = NULL, colors = NULL,
                            species = NULL, alpha = 1, ...) {
 
-  if (!is.character(palette)) {
-    stop("`palette` must be a character vector specifying a color palette
-          contained in `pal`")
-  }
-
-  palette <- match.arg(palette)
   pal_cr <- pal_select(
     palette,
     ncol = ncol,

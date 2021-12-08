@@ -3,7 +3,7 @@
 
 test_that("palette must be a length 1 character vector", {
   expect_error(pal_select(2))
-  expect_error(pal_select())
+  expect_error(pal_select(default))
   expect_error(pal_select(c("receptors", "antibodies")))
 })
 
@@ -103,7 +103,7 @@ test_that("pal_colors() returns a tibble with color information", {
 # Quoted code will be evaluated by the helper function after the PNG device is
 # initialized - allows code to write to PNG file correctly
 expect_snapshot_plot("basic color matrix",
-  'pal_preview("receptors")'
+  'pal_preview()'
 )
 
 expect_snapshot_plot("species instead of colors",

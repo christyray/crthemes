@@ -8,36 +8,58 @@ test_that("color scale is applied to graph", {
     geom_point()
 
   expect_snapshot_plot("default colors, no matching",
-    p + scale_color_cr("receptors")
+    p + scale_color_cr("default")
   )
 
   expect_snapshot_plot("select colors by color name",
     p + scale_color_cr(
       "receptors",
+      ncol = NULL, species = NULL,
       colors = c("orange", "green", "darkblue", "yellow")
     )
   )
 
   expect_snapshot_plot("select colors by species name",
-    p + scale_color_cr("receptors", species = unique(df$z))
+    p + scale_color_cr(
+      "receptors",
+      ncol = NULL, colors = NULL,
+      species = unique(df$z)
+    )
   )
 
   expect_snapshot_plot("select colors by number",
-    p + scale_color_cr("receptors", ncol = c(2,5))
+    p + scale_color_cr(
+      "receptors",
+      colors = NULL, species = NULL,
+      ncol = c(2,5)
+    )
   )
 
   expect_snapshot_plot("can rename color legend with name argument",
-    p + scale_color_cr("receptors", name = "Species")
+    p + scale_color_cr(
+      "receptors",
+      colors = NULL, species = NULL, ncol = NULL,
+      name = "Species"
+    )
   )
 
   expect_snapshot_plot("alpha value modifies color",
-    p + scale_color_cr("receptors", ncol = c(2,5), alpha = 0.5)
+    p + scale_color_cr(
+      "receptors",
+      colors = NULL, species = NULL,
+      ncol = c(2,5),
+      alpha = 0.5
+    )
   )
 
   expect_snapshot_plot("alpha also works in geom_point",
     ggplot(df, aes(x, y, color = z)) +
       geom_point(alpha = 0.5) +
-      scale_color_cr("receptors", ncol = c(2,5))
+      scale_color_cr(
+        "receptors",
+        species = NULL, colors = NULL,
+        ncol = c(2,5)
+      )
   )
 })
 
@@ -52,36 +74,58 @@ test_that("fill scale is applied to graph", {
     geom_col()
 
   expect_snapshot_plot("default fill, no matching",
-    p + scale_fill_cr("receptors")
+    p + scale_fill_cr("default")
   )
 
   expect_snapshot_plot("select fill by color name",
     p + scale_fill_cr(
       "receptors",
+      species = NULL, ncol = NULL,
       colors = c("orange", "green", "darkblue", "yellow", "lightblue")
     )
   )
 
   expect_snapshot_plot("select fill by species name",
-    p + scale_fill_cr("receptors", species = unique(df$x))
+    p + scale_fill_cr(
+      "receptors",
+      ncol = NULL, colors = NULL,
+      species = unique(df$x)
+    )
   )
 
   expect_snapshot_plot("select fill by number",
-    p + scale_fill_cr("receptors", ncol = c(2,6))
+    p + scale_fill_cr(
+      "receptors",
+      colors = NULL, species = NULL,
+      ncol = c(2,6)
+    )
   )
 
   expect_snapshot_plot("can rename fill legend with name argument",
-    p + scale_fill_cr("receptors", name = "Species")
+    p + scale_fill_cr(
+      "receptors",
+      colors = NULL, species = NULL, ncol = NULL,
+      name = "Species"
+    )
   )
 
   expect_snapshot_plot("alpha value modifies fill",
-    p + scale_fill_cr("receptors", ncol = c(2,6), alpha = 0.5)
+    p + scale_fill_cr(
+      "receptors",
+      colors = NULL, species = NULL,
+      ncol = c(2,6),
+      alpha = 0.5
+    )
   )
 
   expect_snapshot_plot("alpha also works in geom_col",
     ggplot(df, aes(x, y, fill = x)) +
       geom_col(alpha = 0.5) +
-      scale_fill_cr("receptors", ncol = c(2,6))
+      scale_fill_cr(
+        "receptors",
+        colors = NULL, species = NULL,
+        ncol = c(2,6)
+      )
   )
 })
 

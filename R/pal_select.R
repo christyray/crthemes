@@ -9,7 +9,7 @@
 #'
 #' @param palette Character vector of length 1 defining the palette to select
 #'   colors from; use \code{\link{pal_names}()} to see a list of available
-#'   palettes
+#'   palettes, default palette is named "default"
 #' @param ncol Range of colors to select from \code{palette}; if only one number
 #'   is provided, it will be the number of colors selected; can only use one
 #'   selection technique
@@ -36,7 +36,7 @@
 #' pal_select("receptors", colors = c("lightred", "red", "orange"))
 #' pal_select("receptors", species = c("IL8", "IL8R", "IL8R-Ab"))
 
-pal_select <- function(palette = names(pal), ncol = NULL, colors = NULL,
+pal_select <- function(palette = "default", ncol = NULL, colors = NULL,
                        species = NULL, alpha = 1) {
 
   pal_check(palette)
@@ -94,16 +94,13 @@ pal_select <- function(palette = names(pal), ncol = NULL, colors = NULL,
 #'
 #' @inheritParams pal_select
 
-pal_check <- function(palette = names(pal)) {
+pal_check <- function(palette = "default") {
   if (!is.character(palette)) {
     stop("`palette` must be a character vector of length 1 specifying a color
          palette contained in `pal`")
-  } else if (identical(palette, names(pal))) {
-    stop("`palette` argument must be provided and must be a character vector of
-         length 1 specifying a color palette contained in `pal`")
   } else if (length(palette) > 1) {
     stop("`palette` must define a single palette to use, not multiple")
   }
 
-  palette <- match.arg(palette)
+  palette <- match.arg(palette, choices = names(pal))
 }

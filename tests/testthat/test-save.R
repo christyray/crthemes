@@ -56,6 +56,7 @@ test_that("crsave can save ggplots", {
 
   expect_snapshot_crplot("save as png", p, "png")
   expect_snapshot_crplot("save as jpeg", p, "jpeg")
+  expect_snapshot_crplot("save as jpg", p, "jpg")
 
 })
 

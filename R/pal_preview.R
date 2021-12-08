@@ -30,7 +30,7 @@
 #' pal_preview("antibodies", label = "species", columns = 2)
 #' pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), label = "hex")
 
-pal_preview <- function(palette = names(pal), ncol = NULL, colors = NULL,
+pal_preview <- function(palette = "default", ncol = NULL, colors = NULL,
                         species = NULL, alpha = 1, label = NULL, columns = NULL) {
   pal_check(palette)
 
@@ -59,7 +59,7 @@ pal_names <- function() {
 
 #' @rdname pal_preview
 #' @export
-pal_colors <- function(palette = names(pal)) {
+pal_colors <- function(palette = "default") {
 
   pal_check(palette)
 

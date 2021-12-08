@@ -8,7 +8,7 @@
 \title{Print information and previews of the color palettes}
 \usage{
 pal_preview(
-  palette = names(pal),
+  palette = "default",
   ncol = NULL,
   colors = NULL,
   species = NULL,
@@ -19,14 +19,14 @@ pal_preview(
 
 pal_names()
 
-pal_colors(palette = names(pal))
+pal_colors(palette = "default")
 
 pal_table()
 }
 \arguments{
 \item{palette}{Character vector of length 1 defining the palette to select
 colors from; use \code{\link{pal_names}()} to see a list of available
-palettes}
+palettes, default palette is named "default"}
 
 \item{ncol}{Range of colors to select from \code{palette}; if only one number
 is provided, it will be the number of colors selected; can only use one

@@ -4,12 +4,12 @@
 \alias{pal_check}
 \title{Check if the palette argument is formatted correctly}
 \usage{
-pal_check(palette = names(pal))
+pal_check(palette = "default")
 }
 \arguments{
 \item{palette}{Character vector of length 1 defining the palette to select
 colors from; use \code{\link{pal_names}()} to see a list of available
-palettes}
+palettes, default palette is named "default"}
 }
 \description{
 Check if the palette argument is formatted correctly
