@@ -4,6 +4,9 @@
 # crthemes
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/christyray/crthemes/workflows/R-CMD-check/badge.svg)](https://github.com/christyray/crthemes/actions)
+
 <!-- badges: end -->
 
 `crthemes` provides a standardized theme to use for my thesis project
