@@ -1,5 +1,5 @@
 Package: crthemes
-Title: A Standard ggplot2 Theme for Visualizations
+Title: A Standardized ggplot2 Theme for Visualizations
 Version: 0.0.0.9000
 Authors@R:
     person("Christy", "Ray", , "cpickering@jhmi.edu", role = c("aut", "cre"),
@@ -32,7 +32,10 @@ Imports:
     grDevices,
     ggthemes
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3
 LazyData: true
+VignetteBuilder: knitr
