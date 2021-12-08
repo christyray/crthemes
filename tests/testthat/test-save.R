@@ -1,6 +1,5 @@
 library(ggplot2)
 
-
 # path_create() -----------------------------------------------------------
 
 test_that("path_create will build a default path", {
@@ -47,6 +46,9 @@ test_that("device_select correctly selects graphics device", {
 })
 
 # Visual tests ------------------------------------------------------------
+
+# All of these will be skipped with automated checking because anything that
+# relies on ragg for plotting isn't compatible
 
 test_that("crsave can save ggplots", {
   df <- data.frame(x = 1:5, y = 1:5, z = c("a", "b", "c", "b", "c"))

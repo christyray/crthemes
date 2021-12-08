@@ -8,7 +8,7 @@ test_that("color scale is applied to graph", {
     geom_point()
 
   expect_snapshot_plot("default colors, no matching",
-    p + scale_color_cr("default")
+    p + scale_color_cr("default") + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select colors by color name",
@@ -16,7 +16,7 @@ test_that("color scale is applied to graph", {
       "receptors",
       ncol = NULL, species = NULL,
       colors = c("orange", "green", "darkblue", "yellow")
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select colors by species name",
@@ -24,7 +24,7 @@ test_that("color scale is applied to graph", {
       "receptors",
       ncol = NULL, colors = NULL,
       species = unique(df$z)
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select colors by number",
@@ -32,7 +32,7 @@ test_that("color scale is applied to graph", {
       "receptors",
       colors = NULL, species = NULL,
       ncol = c(2,5)
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("can rename color legend with name argument",
@@ -40,7 +40,7 @@ test_that("color scale is applied to graph", {
       "receptors",
       colors = NULL, species = NULL, ncol = NULL,
       name = "Species"
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("alpha value modifies color",
@@ -49,7 +49,7 @@ test_that("color scale is applied to graph", {
       colors = NULL, species = NULL,
       ncol = c(2,5),
       alpha = 0.5
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("alpha also works in geom_point",
@@ -59,7 +59,7 @@ test_that("color scale is applied to graph", {
         "receptors",
         species = NULL, colors = NULL,
         ncol = c(2,5)
-      )
+      ) + theme_cr(cairo = TRUE, font = "")
   )
 })
 
@@ -74,7 +74,7 @@ test_that("fill scale is applied to graph", {
     geom_col()
 
   expect_snapshot_plot("default fill, no matching",
-    p + scale_fill_cr("default")
+    p + scale_fill_cr("default") + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select fill by color name",
@@ -82,7 +82,7 @@ test_that("fill scale is applied to graph", {
       "receptors",
       species = NULL, ncol = NULL,
       colors = c("orange", "green", "darkblue", "yellow", "lightblue")
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select fill by species name",
@@ -90,7 +90,7 @@ test_that("fill scale is applied to graph", {
       "receptors",
       ncol = NULL, colors = NULL,
       species = unique(df$x)
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("select fill by number",
@@ -98,7 +98,7 @@ test_that("fill scale is applied to graph", {
       "receptors",
       colors = NULL, species = NULL,
       ncol = c(2,6)
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("can rename fill legend with name argument",
@@ -106,7 +106,7 @@ test_that("fill scale is applied to graph", {
       "receptors",
       colors = NULL, species = NULL, ncol = NULL,
       name = "Species"
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("alpha value modifies fill",
@@ -115,7 +115,7 @@ test_that("fill scale is applied to graph", {
       colors = NULL, species = NULL,
       ncol = c(2,6),
       alpha = 0.5
-    )
+    ) + theme_cr(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("alpha also works in geom_col",
@@ -125,7 +125,7 @@ test_that("fill scale is applied to graph", {
         "receptors",
         colors = NULL, species = NULL,
         ncol = c(2,6)
-      )
+      ) + theme_cr(cairo = TRUE, font = "")
   )
 })
 
@@ -137,7 +137,7 @@ test_that("scale and theme functions can be added together", {
     geom_point()
 
   expect_snapshot_plot("theme and color scale",
-    p + scale_color_cr("receptors") + theme_cr()
+    p + scale_color_cr("receptors") + theme_cr(cairo = TRUE, font = "")
   )
 
   df <- data.frame(
@@ -148,7 +148,7 @@ test_that("scale and theme functions can be added together", {
     geom_col()
 
   expect_snapshot_plot("theme and fill scale",
-    p + scale_fill_cr("receptors") + theme_cr()
+    p + scale_fill_cr("receptors") + theme_cr(cairo = TRUE, font = "")
   )
 
 })

@@ -11,7 +11,7 @@ test_that("theme_cr is applied", {
   df <- data.frame(x = 1:5, y = 1:5)
   p <- ggplot(df, aes(x, y)) +
     geom_point() +
-    theme_cr()
+    theme_cr(cairo = TRUE, font = "")
   expect_doppelganger("theme_cr",
     p
   )
@@ -31,37 +31,37 @@ test_that("plot and font scaling is correct", {
     )
 
   expect_snapshot_plot("plot and font are default size",
-    p + theme_cr(),
+    p + theme_cr(cairo = TRUE, font = ""),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("plot and font are large, font is scaled",
-    p + theme_cr(base_scale = 1.5),
+    p + theme_cr(base_scale = 1.5, cairo = TRUE, font = ""),
     width = 9, height = 6
   )
 
   expect_snapshot_plot("plot and font are small, font is scaled",
-    p + theme_cr(base_scale = 2/3),
+    p + theme_cr(base_scale = 2/3, cairo = TRUE, font = ""),
     width = 4, height = 2.667
   )
 
   expect_snapshot_plot("normal plot with large font",
-    p + theme_cr(base_scale = 1, font_scale = 1.5),
+    p + theme_cr(base_scale = 1, font_scale = 1.5, cairo = TRUE, font = ""),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("normal plot with small font",
-    p + theme_cr(base_scale = 1, font_scale = 2/3),
+    p + theme_cr(base_scale = 1, font_scale = 2/3, cairo = TRUE, font = ""),
     width = 6, height = 4
   )
 
   expect_snapshot_plot("small plot with normal font",
-    p + theme_cr(base_scale = 2/3, font_scale = 1.5),
+    p + theme_cr(base_scale = 2/3, font_scale = 1.5, cairo = TRUE, font = ""),
     width = 4, height = 2.667
   )
 
   expect_snapshot_plot("large plot with normal font",
-    p + theme_cr(base_scale = 1.5, font_scale = 2/3),
+    p + theme_cr(base_scale = 1.5, font_scale = 2/3, cairo = TRUE, font = ""),
     width = 9, height = 6
   )
 
@@ -74,16 +74,18 @@ test_that("geom_rangeframe is applied", {
     coord_cartesian(clip = "off")
 
   expect_snapshot_plot("geom_rangeframe is applied to plot",
-    p + geom_rangeframe(colour = "gray20") + theme_rangeframe()
+    p + geom_rangeframe(colour = "gray20") +
+      theme_rangeframe(cairo = TRUE, font = "")
   )
 
   expect_snapshot_plot("geom_rangeframe is scaled",
-    p + geom_rangeframe(colour = "gray20") + theme_rangeframe(base_scale = 1.5),
+    p + geom_rangeframe(colour = "gray20") +
+      theme_rangeframe(base_scale = 1.5, cairo = TRUE, font = ""),
     width = 9, height = 6
   )
 
   expect_snapshot_plot("rangeframe limits are used",
     p + geom_rangeframe_cr(xlim = c(0,6), ylim = c(2,4), colour = "gray20") +
-      theme_rangeframe()
+      theme_rangeframe(cairo = TRUE, font = "")
   )
 })

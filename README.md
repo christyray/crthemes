@@ -37,7 +37,7 @@ normal `theme()` function:
 library(crthemes)
 library(ggplot2)
 p <- ggplot(mpg, aes(displ, hwy, color = as.factor(cyl))) +
-  geom_point(alpha = 0.6) +
+  geom_point(alpha = 0.4) +
   labs(
     title = "My Custom Theme", 
     x = "Displacement (L)",
@@ -82,7 +82,8 @@ designed to be used with a range frame `geom`.
 
 ``` r
 p <- ggplot(mpg, aes(displ, hwy, color = as.factor(cyl))) +
-  geom_point(alpha = 0.6) +
+  geom_point(alpha = 0.4) +
+  scale_color_cr() +
   labs(
     title = "My Custom Theme", 
     x = "Displacement (L)",
@@ -100,4 +101,4 @@ p
 The `crsave` function saves the plots using sensible defaults for the
 type of plot to be saved. There are also helper functions for bar graphs
 and heat maps to better display the legends. More details on the
-packages functions in the [package vignettes](vignettes).
+packages functions are available in the [package vignettes](vignettes).

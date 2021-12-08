@@ -46,7 +46,7 @@ To apply the default theme to a plot, use `theme_cr()` in place of the normal `t
 library(crthemes)
 library(ggplot2)
 p <- ggplot(mpg, aes(displ, hwy, color = as.factor(cyl))) +
-  geom_point(alpha = 0.6) +
+  geom_point(alpha = 0.4) +
   labs(
     title = "My Custom Theme", 
     x = "Displacement (L)",
@@ -79,7 +79,8 @@ The `geom_rangeframe_cr()` function is a wrapper for [`geom_rangeframe`](https:/
 
 ```{r rangeframe}
 p <- ggplot(mpg, aes(displ, hwy, color = as.factor(cyl))) +
-  geom_point(alpha = 0.6) +
+  geom_point(alpha = 0.4) +
+  scale_color_cr() +
   labs(
     title = "My Custom Theme", 
     x = "Displacement (L)",
@@ -92,4 +93,4 @@ p <- ggplot(mpg, aes(displ, hwy, color = as.factor(cyl))) +
 p
 ```
 
-The `crsave` function saves the plots using sensible defaults for the type of plot to be saved. There are also helper functions for bar graphs and heat maps to better display the legends. More details on the packages functions in the [package vignettes](vignettes).
+The `crsave` function saves the plots using sensible defaults for the type of plot to be saved. There are also helper functions for bar graphs and heat maps to better display the legends. More details on the packages functions are available in the [package vignettes](vignettes).

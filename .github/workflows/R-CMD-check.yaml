@@ -44,3 +44,10 @@ jobs:
           extra-packages: rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v1
+      
+      - name: Upload a Build Artifact
+        if: failure()
+        uses: actions/upload-artifact@v2.3.0
+        with:
+          name: crthemes-check_${{ matrix.config.os }}-${{ matrix.config.r }}
+          path: ${{ github.workspace }}/check/crthemes.Rcheck/tests/testthat/_snaps

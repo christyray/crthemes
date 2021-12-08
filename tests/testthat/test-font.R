@@ -52,21 +52,21 @@ test_that("requested font is previewed", {
   )
   systemfonts::clear_registry()
   font_register()
-  expect_snapshot_plot("preview default font", font_preview())
-  expect_snapshot_plot("preview Roboto Bold", font_preview("Roboto Bold"))
-  expect_snapshot_plot("preview Roboto Light", font_preview("Roboto Light"))
-  expect_snapshot_plot("preview Roboto Serif",
+  expect_snapshot_ragg("preview default font", font_preview())
+  expect_snapshot_ragg("preview Roboto Bold", font_preview("Roboto Bold"))
+  expect_snapshot_ragg("preview Roboto Light", font_preview("Roboto Light"))
+  expect_snapshot_ragg("preview Roboto Serif",
                        font_preview("Roboto Serif Regular")
   )
 
   systemfonts::clear_registry()
   font_register()
-  expect_snapshot_plot("symbols are system default font", font_preview())
+  expect_snapshot_ragg("symbols are system default font", font_preview())
 
   systemfonts::clear_registry()
   font_register()
   symbol_register(font = "Roboto Bold")
-  expect_snapshot_plot("symbols are Roboto Bold", font_preview("Roboto Bold"))
+  expect_snapshot_ragg("symbols are Roboto Bold", font_preview("Roboto Bold"))
 })
 
 test_that("font is applied to theme", {
@@ -82,19 +82,19 @@ test_that("font is applied to theme", {
       tag = "A"
     )
 
-  expect_snapshot_plot("default font is Roboto Regular",
+  expect_snapshot_ragg("default font is Roboto Regular",
     p + theme_cr()
   )
 
-  expect_snapshot_plot("bolder font",
+  expect_snapshot_ragg("bolder font",
     p + theme_cr(font = "Roboto Bold")
   )
 
-  expect_snapshot_plot("lighter font",
+  expect_snapshot_ragg("lighter font",
     p + theme_cr(font = "Roboto Light")
   )
 
-  expect_snapshot_plot("serif font",
+  expect_snapshot_ragg("serif font",
     p + theme_cr(font = "Roboto Serif Regular")
   )
 
@@ -111,13 +111,13 @@ test_that("symbol font is used on plot when requested", {
     scale_color_discrete(labels = scales::label_parse())
 
   systemfonts::clear_registry()
-  expect_snapshot_plot("symbols are system default font on ggplot",
+  expect_snapshot_ragg("symbols are system default font on ggplot",
                        p + theme_cr(symbol = FALSE)
   )
 
 
   systemfonts::clear_registry()
-  expect_snapshot_plot("symbols are Roboto Bold font on ggplot",
+  expect_snapshot_ragg("symbols are Roboto Bold font on ggplot",
                        p + theme_cr(font = "Roboto Bold", symbol = TRUE)
   )
 })

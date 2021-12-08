@@ -82,7 +82,7 @@ font_preview <- function(font = "Roboto Regular") {
 #' @rdname font_preview
 #' @export
 font_names <- function() {
-  unique(systemfonts::registry_fonts()$family)
+  sort(unique(systemfonts::registry_fonts()$family))
 }
 
 #' @rdname font_preview
@@ -105,5 +105,6 @@ font_table <- function() {
       .data$weight,
       .data$italic,
       .data$features
-    )
+    ) %>%
+    dplyr::arrange(.data$family)
 }
