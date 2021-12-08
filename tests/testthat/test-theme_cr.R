@@ -1,4 +1,5 @@
 library(ggplot2)
+library(ggthemes)
 
 test_that("theme_cr runs", {
   expect_s3_class(theme_cr(), "theme")
@@ -64,4 +65,25 @@ test_that("plot and font scaling is correct", {
     width = 9, height = 6
   )
 
+})
+
+test_that("geom_rangeframe is applied", {
+  df <- data.frame(x = 1:5, y = 1:5, z = c("a", "a", "b", "b", "a"))
+  p <- ggplot(df, aes(x, y, color = z)) +
+    geom_point() +
+    coord_cartesian(clip = "off")
+
+  expect_snapshot_plot("geom_rangeframe is applied to plot",
+    p + geom_rangeframe(colour = "gray20") + theme_rangeframe()
+  )
+
+  expect_snapshot_plot("geom_rangeframe is scaled",
+    p + geom_rangeframe(colour = "gray20") + theme_rangeframe(base_scale = 1.5),
+    width = 9, height = 6
+  )
+
+  expect_snapshot_plot("rangeframe limits are used",
+    p + geom_rangeframe_cr(xlim = c(0,6), ylim = c(2,4), colour = "gray20") +
+      theme_rangeframe()
+  )
 })
