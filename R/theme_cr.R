@@ -73,15 +73,15 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
   base_line_size <- base_size/50
   base_rect_size <- base_size/50
 
-  # Update the geom sizes based on the plot scaling
-  geom_scaling(scale_factor = base_scale)
-
   # Apply the font scale to the font size
   font_size <- base_size*font_scale
 
   base_colour <- "gray20"
   base_colour_medium <- "gray30"
   base_colour_light <- "gray80"
+
+  # Update the geom sizes based on the plot scaling, update color
+  geom_scaling(scale_factor = base_scale, base_colour = base_colour)
 
   theme_gray() %+replace%
     theme(
@@ -136,7 +136,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
         hjust = 0
       ),
       axis.ticks = element_line(colour = base_colour),
-      axis.ticks.length = unit(font_size/4, "pt"),
+      axis.ticks.length = unit(font_size/3, "pt"),
       axis.title = element_text(
         size = rel(1.1),
         face = "bold",

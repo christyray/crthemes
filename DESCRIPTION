@@ -29,7 +29,8 @@ Imports:
     magrittr,
     ragg,
     svglite,
-    grDevices
+    grDevices,
+    ggthemes
 Suggests: 
     testthat (>= 3.0.0),
     vdiffr
