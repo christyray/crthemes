@@ -107,7 +107,7 @@ expect_snapshot_plot("basic color matrix",
 )
 
 expect_snapshot_plot("species instead of colors",
-  'pal_preview("receptors", label = "species")'
+  'pal_preview("receptors", labels = "species")'
 )
 
 expect_snapshot_plot("subset of colors",
@@ -118,7 +118,7 @@ expect_snapshot_plot("species with subset of colors",
   'pal_preview(
     "receptors",
     species = c("IL8R", "IL8R-Ab", "IL6R-Ab-IL8R"),
-    label = "species"
+    labels = "species"
   )'
 )
 
@@ -131,5 +131,5 @@ expect_snapshot_plot("change alpha",
 )
 
 expect_snapshot_plot("different palette",
-  'pal_preview("antibodies_dark", label = "species")'
+  'pal_preview("antibodies_dark", labels = "species")'
 )

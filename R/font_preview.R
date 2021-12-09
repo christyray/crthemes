@@ -27,7 +27,7 @@
 
 font_preview <- function(font = "Roboto Regular") {
   if (options("RStudioGD.backend") != "ragg") {
-    stop("The RStudio device must be set to `AGG` to display fonts correctly.
+    warning("The RStudio device must be set to `AGG` to display fonts correctly.
          You can change the device under:
          Tools > Global Options > General > Graphics > Backend")
   }

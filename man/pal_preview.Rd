@@ -13,7 +13,7 @@ pal_preview(
   colors = NULL,
   species = NULL,
   alpha = 1,
-  label = NULL,
+  labels = NULL,
   columns = NULL
 )
 
@@ -43,7 +43,7 @@ technique}
 values are preserved. Default is \code{1}. Uses \code{\link[scales]{alpha}()} to
 set the alpha value}
 
-\item{label}{What text to use for the color preview labels, options are
+\item{labels}{What text to use for the color preview labels, options are
 \code{color}, \code{hex}, or \code{species}, default is \code{color}}
 
 \item{columns}{How many columns to use for the color preview, defaults to
@@ -71,6 +71,6 @@ Light, or Dark}}
 }
 
 \examples{
-pal_preview("antibodies", label = "species", columns = 2)
-pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), label = "hex")
+pal_preview("antibodies", labels = "species", columns = 2)
+pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), labels = "hex")
 }

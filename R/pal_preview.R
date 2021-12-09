@@ -9,7 +9,7 @@
 #' the \code{\link[scales]{scales}} package.
 #'
 #' @inheritParams pal_select
-#' @param label What text to use for the color preview labels, options are
+#' @param labels What text to use for the color preview labels, options are
 #'   \code{color}, \code{hex}, or \code{species}, default is \code{color}
 #' @param columns How many columns to use for the color preview, defaults to
 #'   approximately square
@@ -27,14 +27,14 @@
 #' @export
 #'
 #' @examples
-#' pal_preview("antibodies", label = "species", columns = 2)
-#' pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), label = "hex")
+#' pal_preview("antibodies", labels = "species", columns = 2)
+#' pal_preview("receptors", species = c("IL6R", "IL6R-Ab"), labels = "hex")
 
 pal_preview <- function(palette = "default", ncol = NULL, colors = NULL,
-                        species = NULL, alpha = 1, label = NULL, columns = NULL) {
+                        species = NULL, alpha = 1, labels = NULL, columns = NULL) {
   pal_check(palette)
 
-  label <- match.arg(label, choices = c("color", "species", "hex"))
+  labels <- match.arg(labels, choices = c("color", "species", "hex"))
 
   pal_cr <- pal_select(palette = palette, ncol = ncol, colors = colors,
                            species = species, alpha = alpha)
@@ -42,12 +42,12 @@ pal_preview <- function(palette = "default", ncol = NULL, colors = NULL,
   # Select only the non-alpha component of the hex code for matching
   pal_hex <- substr(pal_cr, 1, 7)
 
-  labels <- dplyr::filter(
+  label_text <- dplyr::filter(
     pal[[palette]][["colors"]],
     .data$hex %in% pal_hex
-  )[[label]]
+  )[[labels]]
 
-  color_preview(pal_cr, labels = labels, columns = columns)
+  color_preview(pal_cr, labels = label_text, columns = columns)
   invisible("")
 }
 
