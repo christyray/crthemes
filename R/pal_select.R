@@ -59,7 +59,8 @@ pal_select <- function(palette = "default", ncol = NULL, colors = NULL,
     pal_out <- dplyr::filter(
       pal[[palette]][["colors"]],
       .data$color %in% colors
-    )
+    ) %>%
+      dplyr::arrange(match(.data$color, colors))
 
     if (nrow(pal_out) == 0) {
       warning(
@@ -68,11 +69,13 @@ pal_select <- function(palette = "default", ncol = NULL, colors = NULL,
     }
 
     pal_out <- pal_out[c("color", "hex")]
+
   } else if (!is.null(species)) {
     pal_out <- dplyr::filter(
       pal[[palette]][["colors"]],
       .data$species %in% .env$species
-    )
+    ) %>%
+      dplyr::arrange(match(.data$species, .env$species))
 
     if (nrow(pal_out) == 0) {
       warning(
@@ -81,6 +84,7 @@ pal_select <- function(palette = "default", ncol = NULL, colors = NULL,
     }
 
     pal_out <- pal_out[c("species", "hex")]
+
   } else {
     pal_out <- pal[[palette]][["colors"]][c("color", "hex")]
   }

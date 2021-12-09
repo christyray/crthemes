@@ -76,6 +76,29 @@ test_that("pal_select() adds alpha to hex code when requested", {
   )
 })
 
+test_that("pal_select() returns colors in order they were named", {
+  expect_named(
+    pal_select("antibodies", colors = c("orange", "blue")),
+    c("orange", "blue")
+  )
+
+  expect_named(
+    pal_select("antibodies", species = c("BS1", "Tocilizumab")),
+    c("BS1", "Tocilizumab")
+  )
+
+  expect_equal(
+    pal_select("antibodies", colors = c("orange", "blue")),
+    c("orange" = "#D99857", "blue" = "#38788C")
+  )
+
+  expect_equal(
+    pal_select("antibodies", species = c("BS1", "Tocilizumab")),
+    c("BS1" = "#90B350", "Tocilizumab" = "#38788C")
+  )
+
+})
+
 
 # pal_names() -------------------------------------------------------------
 
