@@ -14,7 +14,11 @@ test_that("legend spacing is increased with key function", {
   )
 
   expect_snapshot_plot("bar graph legend spacing increased",
-    p + geom_col(key_glyph = "polygon2")
+    p + geom_col(key_glyph = key_scale())
+  )
+
+  expect_snapshot_plot("bar graph legend spacing increased more",
+    p + geom_col(key_glyph = key_scale(0.5))
   )
 })
 
