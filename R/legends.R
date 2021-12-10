@@ -34,7 +34,7 @@
 #'           levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
 #'     y = c(0.45, 0.78, 0.61, 0.31, 0.72))
 #' p <- ggplot(df, aes(x, y, fill = x)) +
-#'     geom_col(key_glyph = "polygon2")
+#'     geom_col(key_glyph = key_scale())
 
 key_scale <- function(scale = 0.8) {
   function(data, params, size) {
@@ -89,4 +89,42 @@ heatmap_legend <- function(base_scale = 1, font = "Roboto Regular") {
     barheight = 12*base_scale,
     ticks.linewidth = 1*base_scale
   )
+}
+
+#' Convenience functions to remove space between plot and axes
+#'
+#' \code{expand0()} and \code{expand1()} are a convenience functions that call
+#' \code{expansion(mult = c(0,0))} and \code{expansion(mult = c(0,0.1))},
+#' respectively, to remove space between the plot and the axes. See
+#' \code{\link[ggplot2]{expansion}()} for more information on setting the space
+#' between the plotted data and the axes.
+#'
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'
+#' p <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+#'     geom_raster() +
+#'     scale_fill_distiller(palette = "YlGn") +
+#'     scale_x_continuous(expand = expand0()) +
+#'     scale_y_continuous(expand = expand0())
+#'
+#' df <- data.frame(
+#'     x = factor(c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R"),
+#'           levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
+#'     y = c(0.45, 0.78, 0.61, 0.31, 0.72))
+#' p <- ggplot(df, aes(x, y, fill = x)) +
+#'     geom_col() +
+#'     scale_y_continuous(expand = expand1())
+
+expand0 <- function() {
+  ggplot2::expansion(mult = c(0,0))
+}
+
+#' @rdname expand0
+#' @export
+
+expand1 <- function() {
+  ggplot2::expansion(mult = c(0,0.1))
 }

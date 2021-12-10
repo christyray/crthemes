@@ -51,5 +51,5 @@ df <- data.frame(
           levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
     y = c(0.45, 0.78, 0.61, 0.31, 0.72))
 p <- ggplot(df, aes(x, y, fill = x)) +
-    geom_col(key_glyph = "polygon2")
+    geom_col(key_glyph = key_scale())
 }

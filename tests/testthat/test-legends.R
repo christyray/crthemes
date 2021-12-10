@@ -84,3 +84,30 @@ test_that("heatmap legend scales with plot scale", {
     width = 4, height = 2.667
   )
 })
+
+
+# Expand0 -----------------------------------------------------------------
+
+test_that("plot space is removed with expand0()", {
+  p <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+    geom_raster() +
+    scale_fill_binned() +
+    theme_cr(base_scale = 1, cairo = TRUE, font = "")
+
+  df <- data.frame(
+    x = factor(c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R"),
+               levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
+    y = c(0.45, 0.78, 0.61, 0.31, 0.72))
+  p1 <- ggplot(df, aes(x, y, fill = x)) + geom_col() +
+    theme_cr(base_scale = 1, cairo = TRUE, font = "")
+
+  expect_snapshot_plot("no space on plot",
+    p +
+      scale_x_continuous(expand = expand0()) +
+      scale_y_continuous(expand = expand0())
+  )
+
+  expect_snapshot_plot("no space under bars",
+    p1 + scale_y_continuous(expand = expand1())
+  )
+})

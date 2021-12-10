@@ -68,7 +68,7 @@ df <- data.frame(
     y = c(0.45, 0.78, 0.61, 0.31, 0.72))
 p <- ggplot(df, aes(x, y, fill = x)) +
   geom_col(show.legend = FALSE) +
-  scale_y_continuous(expand = expansion(mult = 0)) +
+  scale_y_continuous(expand = expand1()) +
   scale_fill_cr(palette = "receptors", species = unique(df$x)) +
   labs(x = NULL, y = NULL) +
   theme_cr()

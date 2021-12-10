@@ -2,6 +2,8 @@
 
 export(crsave)
 export(draw_key_polygon2)
+export(expand0)
+export(expand1)
 export(font_names)
 export(font_preview)
 export(font_styles)
