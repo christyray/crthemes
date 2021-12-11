@@ -33,12 +33,6 @@ expect_snapshot_ragg <- function(name, plot_object, width = 6, height = 4) {
   # Only test on MacOS because of differences in saved plots
   testthat::skip_on_os(c("windows", "linux", "solaris"))
 
-  # Skip if not in RStudio because plotting breaks without ragg
-  testthat::skip_if(
-    options("RStudioGD.backend") != "ragg",
-    message = "ragg-based plotting is only tested in RStudio"
-  )
-
   # Add name as plot title
   if ("ggplot" %in% class(plot_object)) {
     plot_object <- plot_object + ggplot2::ggtitle(name)

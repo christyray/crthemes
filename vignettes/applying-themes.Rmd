@@ -1,9 +1,9 @@
 ---
-title: "Applying the Theme"
+title: "Applying Themes"
 output: 
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Applying the Theme}
+  %\VignetteIndexEntry{Applying Themes}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -45,13 +45,9 @@ p <- ggplot(data = penguins,
     title = "Flipper and Bill Length",
     caption = "Data adapted from the palmerpenguins R package"
   ) +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 p
 ```
-
-### Font Note
-
-**Note:** The vignette builder cannot use the custom fonts included in the theme, so all of the `theme_cr()` function calls with include `cairo = TRUE` and `font = ""` to prevent issues. When using the theme in the installed package, this is only necessary for the `pdf` and `eps` device (see the ["Scaling and Saving" vignette](scaling-and-saving.html) for more information).
 
 ## Fonts
 
@@ -61,17 +57,13 @@ The default font used for the plot is "Roboto Regular", with bold text using "Ro
 font_names()
 
 font_table()
-```
 
-```{r font-preview, eval=FALSE}
-# Not evaluated because not compatible with the vignette builder
 font_preview("Roboto Light")
 ```
 
 Any of the included fonts can be used with `theme_cr()` by passing their names to the `font` argument:
 
-```{r serif-font, eval = FALSE}
-# Not evaluated because not compatible with the vignette builder
+```{r serif-font}
 p + theme_cr(font = "Roboto Serif Regular")
 ```
 
@@ -81,9 +73,7 @@ The `ragg` package uses the font named `"symbol"` for all symbols rendered in a 
 
 To remove a previously registered `"symbol"` font, use [`systemfonts::clear_registry()`](https://github.com/r-lib/systemfonts) or restart the R session. The `"symbol"` font cannot be overwritten once it is set; to name a new `"symbol"` font, first remove the previously registered one, then run `theme_cr()` with `font` set to the font to be used for `"symbol"`.
 
-```{r symbol-font, eval=FALSE}
-# Not evaluated because not compatible with the vignette builder
-
+```{r symbol-font}
 # Clear the previous symbol font
 systemfonts::clear_registry()
 
@@ -174,7 +164,7 @@ df <- df %>% group_by(il) %>% summarize(avg = mean(x))
 mol_p_col <- ggplot(data = df, aes(x = il, y = avg, fill = il)) +
   geom_col() +
   labs(x = NULL, y = "Y Axis", title = "Random Data") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 
 # Using the species names to call the colors
 mol_p_col + scale_fill_cr(palette = "receptors", species = levels(df$il), guide = NULL)

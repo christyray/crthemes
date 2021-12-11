@@ -52,7 +52,7 @@ p <- ggplot(df, aes(x, y, fill = x)) +
   scale_y_continuous(expand = expand1()) +
   scale_fill_cr(palette = "receptors", species = levels(df$x)) +
   labs(x = NULL, y = "Y Axis", title = "Bar Graph", fill = "Species") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 ```
 
 \
@@ -118,7 +118,7 @@ The `ggplot` default legend size:
 
 ```{r heatmap-default}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1) + 
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 ```
 
 \
@@ -129,7 +129,7 @@ p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1) +
 ```{r heatmap-crthemes}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
                            guide = heatmap_legend()) + 
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 ```
 
 \
@@ -142,7 +142,7 @@ The scaling is designed to be used with the `crsave()` function; here, it will a
 ```{r heatmap-bigplot}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
                            guide = heatmap_legend(base_scale = 1.5)) + 
-  theme_cr(base_scale = 1.5, cairo = TRUE, font = "")
+  theme_cr(base_scale = 1.5)
 ```
 
 \
@@ -153,7 +153,7 @@ To increase the size of the color bar without changing the size of the plot, jus
 ```{r heatmap-biglegend}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
                            guide = heatmap_legend(base_scale = 1.5)) + 
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 ```
 
 The appearance of legends in `ggplot` can be further adjusted with the [`override.aes`](https://ggplot2.tidyverse.org/reference/guide_legend.html) argument of the `guide_legend()` function. For more information, see [this article](https://aosmith.rbind.io/2020/07/09/ggplot2-override-aes/) about the various applications of `override.aes()`. 

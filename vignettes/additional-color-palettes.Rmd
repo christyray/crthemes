@@ -73,7 +73,7 @@ df <- data.frame(x = x, y = x + rnorm(200, sd = 1.5),
 p <- ggplot(df, aes(x, y, color = z)) +
   geom_point(alpha = 0.6) +
   labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Continuous") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 
 # Continuous palette
 p + scale_color_paletteer_c("pals::ocean.matter", direction = -1)
@@ -88,7 +88,7 @@ df <- df %>% mutate(bin = ntile(.data$z, 7))
 p_d <- ggplot(df, aes(x, y, color = as.factor(bin))) +
   geom_point(alpha = 0.6) +
   labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Discrete") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 
 # Discrete palette
 p_d + scale_color_paletteer_d("rcartocolor::Sunset")
@@ -108,7 +108,7 @@ pal <- ramp(seq(0, 1, length.out = 5))
 p_i <- ggplot(df, aes(x, y, color = as.factor(bin))) +
   geom_point(alpha = 0.6) +
   labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Interpolated") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 
 # Interpolated palette; use scale_color_manual because the colors are in a variable
 p_i + scale_color_manual(values = pal)

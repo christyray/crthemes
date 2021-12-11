@@ -53,7 +53,7 @@ Also, note that `coord_cartesian(clip = "off")` has to be used with `geom_rangef
 ```{r rf-default}
 p + geom_rangeframe(colour = "gray20") + 
   coord_cartesian(clip = "off") +
-  theme_cr(cairo = TRUE, font = "")
+  theme_cr()
 ```
 \
 \
@@ -63,7 +63,7 @@ The `theme_rangeframe()` removes the axis line so the `geom_rangeframe()` lines 
 ```{r rf-crthemes}
 p + geom_rangeframe(colour = "gray20") + 
   coord_cartesian(clip = "off") +
-  theme_rangeframe(cairo = TRUE, font = "")
+  theme_rangeframe()
 ```
 \
 \
@@ -73,5 +73,5 @@ p + geom_rangeframe(colour = "gray20") +
 ```{r rf-diffrange}
 p + geom_rangeframe_cr(xlim = c(-3.5, 3.5), ylim = c(-6, 10), colour = "gray20") + 
   coord_cartesian(clip = "off") +
-  theme_rangeframe(cairo = TRUE, font = "")
+  theme_rangeframe()
 ```
