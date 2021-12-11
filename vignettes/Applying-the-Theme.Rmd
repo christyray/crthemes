@@ -1,19 +1,181 @@
 ---
-title: "Applying-the-Theme"
-output: rmarkdown::html_vignette
+title: "Applying the Theme"
+output: 
+  rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Applying-the-Theme}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Applying the Theme}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 6,
+  fig.asp = 2/3,
+  out.width = "75%",
+  dev = "ragg_png"
 )
 ```
 
-```{r setup}
+```{r setup, include=FALSE}
+library(ggplot2)
 library(crthemes)
+library(palmerpenguins)
+penguins <- tidyr::drop_na(penguins)
+```
+
+*Updated `r format(Sys.time(), "%b %d, %Y")`*
+
+## Base Theme
+
+The core of the `crthemes` package is the `theme_cr()` function - a `ggplot2` theme that can be applied to a `ggplot` object just like the default `theme_grey()` or `theme_bw()`. The `theme_cr()` function applies a full set of theme values to the plot, and those theme values can be modified with the [`theme()` function](https://ggplot2.tidyverse.org/reference/theme.html) if necessary.
+
+The theme is applied by adding it to a `ggplot` object:
+
+```{r default}
+p <- ggplot(data = penguins, 
+            aes(x = flipper_length_mm, y = bill_length_mm, color = species)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    x = "Flipper Length (mm)", 
+    y = "Bill Length (mm)", 
+    color = "Species",
+    title = "Flipper and Bill Length",
+    caption = "Data adapted from the palmerpenguins R package"
+  ) +
+  theme_cr(cairo = TRUE, font = "")
+p
+```
+
+### Font Note
+
+**Note:** The vignette builder cannot use the custom fonts included in the theme, so all of the `theme_cr()` function calls with include `cairo = TRUE` and `font = ""` to prevent issues. When using the theme in the installed package, this is only necessary for the `pdf` and `eps` device (see the ["Scaling and Saving" vignette](scaling-and-saving.html) for more information).
+
+## Fonts
+
+The default font used for the plot is "Roboto Regular", with bold text using "Roboto Medium". To see a list of included font families, use the `font_names()` function. The `font_table()` function prints a table of all of the included fonts and their properties. The `font_preview()` function generates a preview of a selected font:
+
+```{r font-table, warning = FALSE, out.width = "50%"}
+font_names()
+
+font_table()
+```
+
+```{r font-preview, eval=FALSE}
+# Not evaluated because not compatible with the vignette builder
+font_preview("Roboto Light")
+```
+
+Any of the included fonts can be used with `theme_cr()` by passing their names to the `font` argument:
+
+```{r serif-font, eval = FALSE}
+# Not evaluated because not compatible with the vignette builder
+p + theme_cr(font = "Roboto Serif Regular")
+```
+
+### Symbol Fonts
+
+The `ragg` package uses the font named `"symbol"` for all symbols rendered in a plot. `theme_cr()` registers the provided `font` as the `"symbol"` font the first time it is called during an R session. To prevent this, use `symbol = FALSE`.
+
+To remove a previously registered `"symbol"` font, use [`systemfonts::clear_registry()`](https://github.com/r-lib/systemfonts) or restart the R session. The `"symbol"` font cannot be overwritten once it is set; to name a new `"symbol"` font, first remove the previously registered one, then run `theme_cr()` with `font` set to the font to be used for `"symbol"`.
+
+```{r symbol-font, eval=FALSE}
+# Not evaluated because not compatible with the vignette builder
+
+# Clear the previous symbol font
+systemfonts::clear_registry()
+
+p + labs(title = "Symbols Use Bold Font", 
+         subtitle = bquote(alpha ~ beta ~ gamma ~ "are symbols")) +
+  theme_cr(font = "Roboto Bold")
+```
+
+### Base R Graphics Compatibility
+
+By default, the packaged fonts are used with `theme_cr()`. If compatibility with base R graphics or cairographics is required, the argument `cairo = TRUE` can be used with `font` set to a system default font (or `font = ""` to use the system default sans serif font).
+
+```{r cairo-font}
+p + theme_cr(cairo = TRUE, font = "serif")
+```
+
+## Colors
+
+The `pal` data set contains several color palettes to use with the standard theme. The list of palette names can be printed with `pal_names()`, and `pal_table()` prints a table with the properties of all of the included palettes. The colors within a specific palette can be listed with `pal_colors()`.
+
+```{r pal-print}
+pal_names()
+
+pal_table()
+
+pal_colors("receptors")
+```
+
+Several of the palettes are `Named`, which means they have a list of molecule names matched to specific colors of the palette. The colors of a specific palette along with the color names and molecule names can be displayed with `pal_preview()`:
+
+```{r pal-preview}
+# By default, pal_preview shows the color names
+pal_preview(palette = "receptors")
+# The label argument specifies what to use for the color labels
+pal_preview(palette = "receptors", labels = "species")
+# Specific species can be selected with the species argument
+pal_preview(palette = "receptors", 
+            species = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab"),
+            labels = "species")
+# The hex codes can also be displayed
+pal_preview(palette = "highlight2", labels = "hex")
+# Alpha transparency can be previewed
+pal_preview(palette = "highlight2", alpha = 0.4)
+```
+
+### Scale Functions
+
+`scale_fill_cr()` and `scale_color_cr()` allow the custom palettes to be applied to a `ggplot` object. These functions are used like typical `scale_*()` functions.
+
+They additionally accept the arguments:
+
+-   `palette`: the palette to be applied
+-   `ncol`: the range of colors to use from the palette
+-   `colors`: the names of colors to use
+-   `species`: the name-matched colors corresponding to particular molecules
+-   `alpha`: the transparency value
+
+```{r scales}
+# Apply a color palette
+p + scale_color_cr(palette = "antibodies")
+# Select specific colors from the palette, colors will be used in order given
+p + scale_color_cr(palette = "antibodies", colors = c("blue", "orange", "green"))
+```
+
+When the data has includes species names from the project model, those names can be matched to color palettes with the `Named` trait:
+
+```{r scales-named}
+set.seed(202)
+mol <- c("IL6R", "IL8R", "IL6", "IL8")
+df <- data.frame(x = rnorm(120), y = rnorm(120), il = as.factor(rep(mol,30)))
+mol_p <- ggplot(data = df, aes(x, y, color = il)) +
+  geom_point() +
+  labs(x = "X Axis", y = "Y Axis", color = "Species", title = "Random Data") +
+  theme_cr()
+
+# Using the species names to call the colors
+mol_p + scale_color_cr(palette = "receptors", species = levels(df$il))
+# Alpha can also be applied directly in the scale_color_cr function
+mol_p + scale_color_cr(palette = "receptors", species = levels(df$il), alpha = 0.5)
+```
+
+`scale_fill_cr()` works exactly the same as `scale_color_cr()`:
+
+```{r scales-fill, message = FALSE}
+library(dplyr)
+# Using functions from dplyr to compute summary statistics
+df <- df %>% group_by(il) %>% summarize(avg = mean(x))
+mol_p_col <- ggplot(data = df, aes(x = il, y = avg, fill = il)) +
+  geom_col() +
+  labs(x = NULL, y = "Y Axis", title = "Random Data") +
+  theme_cr(cairo = TRUE, font = "")
+
+# Using the species names to call the colors
+mol_p_col + scale_fill_cr(palette = "receptors", species = levels(df$il), guide = NULL)
 ```

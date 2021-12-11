@@ -1,0 +1,191 @@
+---
+title: "Additional Color Palettes"
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Additional Color Palettes}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.asp = 2/3,
+  out.width = "75%",
+  dev = "ragg_png"
+)
+```
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(crthemes)
+```
+
+*Updated `r format(Sys.time(), "%b %d, %Y")`*
+\
+\
+`crthemes` includes several qualitative, discrete palettes, but does not include any ordered discrete palettes or continuous palettes. The [`paletteer` package](https://emilhvitfeldt.github.io/paletteer/) collects a large variety of discrete and continuous color palettes and provides wrapper functions to access them. 
+
+[`show_col()`](https://scales.r-lib.org/reference/show_col.html) from the [`scales` package](https://scales.r-lib.org/index.html) can be used to preview colors from other packages (and is the basis for the `pal_preview()` function in this package).
+
+## Using `paletteer`
+
+`paletteer_c()` and `paletteer_d()` access continuous and discrete palettes in the `paletteer` package, respectively. The arguments are:
+
+* `palette`: the specific palette to be used, must be provided as a string in the form `"packagename::palettename"`
+* `n`: the number of colors to return; required for continuous palettes, optional for discrete palettes
+* `direction`: 1 (default) for the standard direction, -1 for reversed
+
+`palettes_c_names` and `palettes_d_names` print the packages and palettes for the included continuous and discrete palettes, respectively. The included palettes are also listed in [this repository](https://github.com/EmilHvitfeldt/r-color-palettes).
+
+To use more colors than are included in a palette, use the `colour_ramp()` function from the scales package to interpolate the colors. `colour_ramp()` returns a function that will take input of a numeric sequence and return a character vector containing the palette colors. 
+
+```{r paletteer, fig.width=7.5, out.width="60%"}
+library(scales)
+library(paletteer)
+
+pal <- paletteer_d("rcartocolor::DarkMint")
+show_col(pal)
+# To interpolate between colors in a palette, use colour_ramp()
+ramp <- colour_ramp(pal)
+# ramp is a function that takes a numeric vector and returns a palette
+pal25 <- ramp(seq(0, 1, length.out = 25))
+show_col(pal25)
+# Paletteer also has continuous palettes
+pal <- paletteer_c("pals::ocean.deep", n = 25)
+show_col(pal)
+```
+
+### Scale Functions
+
+`paletteer` includes `scale_*_paletteer_c()` and `scale_*_paletteer_d()` functions to apply the included palettes to ggplots. Like with the other `paletteer` functions, the palette needs to be provided as a string in the form `packagename::palettename`
+
+#### Continuous
+
+```{r scales-paletteer-c}
+set.seed(503)
+x <- rnorm(200)
+df <- data.frame(x = x, y = x + rnorm(200, sd = 1.5), 
+                 z = x + rnorm(200, mean = 5, sd = 0.5))
+p <- ggplot(df, aes(x, y, color = z)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Continuous") +
+  theme_cr(cairo = TRUE, font = "")
+
+# Continuous palette
+p + scale_color_paletteer_c("pals::ocean.matter", direction = -1)
+```
+
+#### Discrete
+
+```{r scales-paletteer-d}
+library(dplyr)
+
+df <- df %>% mutate(bin = ntile(.data$z, 7))
+p_d <- ggplot(df, aes(x, y, color = as.factor(bin))) +
+  geom_point(alpha = 0.6) +
+  labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Discrete") +
+  theme_cr(cairo = TRUE, font = "")
+
+# Discrete palette
+p_d + scale_color_paletteer_d("rcartocolor::Sunset")
+```
+
+#### Interpolating
+
+If the number of colors needed is not the same as the number of colors in the palette, the `colour_ramp()` function can be used to interpolate the palette. 
+
+```{r scales-interpolate}
+df <- df %>% mutate(bin = ntile(.data$z, 5))
+
+# Interpolate palette to 5 colors
+ramp <- colour_ramp(paletteer_d("rcartocolor::Sunset"))
+pal <- ramp(seq(0, 1, length.out = 5))
+
+p_i <- ggplot(df, aes(x, y, color = as.factor(bin))) +
+  geom_point(alpha = 0.6) +
+  labs(x = "X Axis", y = "Y Axis", color = NULL, title = "Interpolated") +
+  theme_cr(cairo = TRUE, font = "")
+
+# Interpolated palette; use scale_color_manual because the colors are in a variable
+p_i + scale_color_manual(values = pal)
+```
+
+## Palette Options
+
+Below are some options for sequential and diverging color palettes from the `paletteer`, `RColorBrewer`, and `viridis` packages. 
+
+The `RColorBrewer` package is included in `ggplot2` by default through:
+
+* `scale_color_brewer()` (discrete)
+* `scale_color_distiller()` (continuous)
+* `scale_color_fermenter()` (binned)
+
+The `viridis` package is included in `ggplot2` by default through: 
+
+* `scale_color_viridis_d()` (discrete)
+* `scale_color_viridis_c()` (continuous)
+* `scale_color_viridis_b()` (binned)
+
+For more colors, see the full [list of available palettes](https://github.com/EmilHvitfeldt/r-color-palettes).
+
+### Sequential
+
+```{r paletteer-seq, fig.width=7.5, out.width="60%"}
+# Discrete, "BurgYl" from "rcartocolor
+pal <- paletteer_d("rcartocolor::BurgYl")
+show_col(pal, labels = FALSE)
+# Discrete, "DarkMint" from "rcartocolor
+pal <- paletteer_d("rcartocolor::DarkMint")
+show_col(pal, labels = FALSE)
+# Discrete, "RdPu" from "RColorBrewer
+pal <- paletteer_d("RColorBrewer::RdPu")
+show_col(pal, labels = FALSE)
+# Discrete, "PuBuGn" from "RColorBrewer
+pal <- paletteer_d("RColorBrewer::PuBuGn")
+show_col(pal, labels = FALSE)
+# Continuous, "magma" from "viridis"
+pal <- paletteer_c("viridis::magma",16)
+show_col(pal, labels = FALSE)
+# Continuous, "viridis" from "viridis"
+pal <- paletteer_c("viridis::viridis",16)
+show_col(pal, labels = FALSE)
+# Continuous, "ocean.matter" from "pals"
+pal <- paletteer_c("pals::ocean.matter",16)
+show_col(pal, labels = FALSE)
+# Continuous, "ocean.tempo" from "pals"
+pal <- paletteer_c("pals::ocean.tempo",16)
+show_col(pal, labels = FALSE)
+```
+
+### Diverging
+
+```{r paletteer-div, fig.width=7.5, out.width="60%"}
+# Discrete, "TealRose" from "rcartocolor
+pal <- paletteer_d("rcartocolor::TealRose")
+show_col(pal, labels = FALSE)
+# Discrete, "Fall" from "rcartocolor
+pal <- paletteer_d("rcartocolor::Fall")
+show_col(pal, labels = FALSE)
+# Discrete, "RdBu" from "RColorBrewer
+pal <- paletteer_d("RColorBrewer::RdBu")
+show_col(pal, labels = FALSE)
+# Discrete, "BrBG" from "RColorBrewer
+pal <- paletteer_d("RColorBrewer::BrBG")
+show_col(pal, labels = FALSE)
+# Continuous, "vik" from "scico"
+pal <- paletteer_c("scico::vik",16)
+show_col(pal, labels = FALSE)
+# Continuous, "broc" from "scico"
+pal <- paletteer_c("scico::broc",16)
+show_col(pal, labels = FALSE)
+# Continuous, "ocean.balance" from "pals"
+pal <- paletteer_c("pals::ocean.balance",16)
+show_col(pal, labels = FALSE)
+# Continuous, "ocean.curl" from "pals"
+pal <- paletteer_c("pals::ocean.curl",16)
+show_col(pal, labels = FALSE)
+```

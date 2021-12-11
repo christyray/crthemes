@@ -1,0 +1,159 @@
+---
+title: "Legends"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Legends}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6.5,
+  fig.asp = 2/3,
+  out.width = "75%",
+  dev = "ragg_png"
+)
+```
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(crthemes)
+```
+
+*Updated `r format(Sys.time(), "%b %d, %Y")`*
+\
+\
+The `crthemes` package includes two functions for modifying the legends of bar graphs and heat maps to better work with the rest of the theme. The examples here show those functions and some ways to use the standard `ggplot` functions to improve the output of fill-based graphs.
+
+## Bar Graphs
+
+The standard bar graph legend has the fill boxes very close together, and there isn't currently a way to space them out further using the standard `theme` function. The `theme` functions are applied somewhat unintuitively to the legend spacing due to how the legends are built on grid graphics ([source](https://github.com/tidyverse/ggplot2/issues/4352)).
+
+To workaround this, we can define a new key-drawing function, as described [here](https://stackoverflow.com/a/50615868/8793182) and [here](https://github.com/tidyverse/ggplot2/issues/2844#issuecomment-414808742). The key drawing function in this package is `draw_key_polygon2()` with the wrapper function `key_scale()`. They can be used with `key_glyph = key_scale()` inside a `geom` function.
+
+The inputs to the `draw_key` functions are the plot `data`, additional `params` that specific to the `geom` being plotted, and the `size` of the key space in mm. These are all available in the `ggplot2` environment and do not need to be defined by the user.
+
+To increase the space between the legend keys, the `draw_key_polygon2()` function provides a modifier that scales the legend key down within its allotted space. This gives the appearance of increased space between the keys by making them smaller. The `key_scale()` wrapper function allows the user to specify a scaling factor, with a default scaling of 0.8.
+
+### Examples
+
+The plot code used for the examples is below. The `expand1()` function is a convenience wrapper for `expansion(mult = c(0,0.1))` to remove the space between the bars and the x axis.
+
+```{r bar-setup}
+df <- data.frame(
+  x = factor(c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R"),
+             levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
+  y = c(0.45, 0.78, 0.61, 0.31, 0.72))
+
+p <- ggplot(df, aes(x, y, fill = x)) +
+  scale_y_continuous(expand = expand1()) +
+  scale_fill_cr(palette = "receptors", species = levels(df$x)) +
+  labs(x = NULL, y = "Y Axis", title = "Bar Graph", fill = "Species") +
+  theme_cr(cairo = TRUE, font = "")
+```
+
+\
+\
+The `ggplot` default legend spacing:
+
+```{r bar-default}
+p + geom_col()
+```
+
+\
+\
+\
+The `key_scale()` function is used with the `key_glyph` argument of a `geom` function. It only has one argument, `scale`, which defaults to `0.8` (80 percent). The legend spacing using the `key_scale()` default:
+
+```{r bar-crthemes}
+p + geom_col(key_glyph = key_scale()) 
+```
+
+\
+\
+\
+A value for the scaling factor can also be passed to `key_scale`. Smaller key scaling will lead to more space between the legend keys:
+
+```{r bar-increased}
+p + geom_col(key_glyph = key_scale(0.5))
+```
+
+\
+\
+\
+Using the `legend.key.size` argument of the [`theme()` function](https://ggplot2.tidyverse.org/reference/theme.html) increases the size of the space allotted to the legend keys. This will add more space between the text lines and will make the keys look larger even when they are scaled down:
+
+```{r bar-larger}
+p + geom_col(key_glyph = key_scale(0.5)) + theme(legend.key.size = unit(24, "pt"))
+```
+
+## Heat Maps
+
+The color bar accompanying heat maps and other plots with a continuous `fill` scale is typically significantly shorter than the height of the plot. The `heatmap_legend()` function uses the [`guide_colourbar()`](https://ggplot2.tidyverse.org/reference/guides.html) function to increase the length of the color bar and scale it to the size of the plot. It also removes lines for the upper and lower limits and scales the size of the ticks with the plot size.
+
+The `heatmap_legend()` function is used by passing it to the `guide` argument of the [`scale_fill_*()`](https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html) function.
+
+### Examples
+
+The plot code used for the examples is below. The `expand0()` function is a convenience wrapper for `expansion(mult = c(0,0))` to remove the space between the plot and the axes. `theme(axis.line = element_blank())` removes the axis lines.
+
+```{r heatmap-legend}
+library(paletteer)
+
+p <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster(interpolate = TRUE) +
+  scale_x_continuous(expand = expand0()) +
+  scale_y_continuous(expand = expand0()) +
+  labs(x = "Time to Next Eruption (min)", y = "Eruption Time (min)",
+       fill = "Density", title = "Old Faithful") +
+  theme(axis.line = element_blank())
+```
+
+\
+\
+The `ggplot` default legend size:
+
+```{r heatmap-default}
+p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1) + 
+  theme_cr(cairo = TRUE, font = "")
+```
+
+\
+\
+\
+`heatmap_legend()` is passed to the `guide` argument of the `scale_fill_*()` function. It only has one argument, `base_scale`, which corresponds to the `base_scale` argument of the `theme_cr` function and has a default value of `1`. The default creates a 6" by 4" plot with a font size of 12 pt.
+
+```{r heatmap-crthemes}
+p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
+                           guide = heatmap_legend()) + 
+  theme_cr(cairo = TRUE, font = "")
+```
+
+\
+\
+\
+When the plot size is increased through the `base_scale` argument in `theme_cr()`, the same value should be passed to `heatmap_legend()` to scale the color bar with the plot size.
+
+The scaling is designed to be used with the `crsave()` function; here, it will appear as larger font and a larger color bar in the same plot size.
+
+```{r heatmap-bigplot}
+p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
+                           guide = heatmap_legend(base_scale = 1.5)) + 
+  theme_cr(base_scale = 1.5, cairo = TRUE, font = "")
+```
+
+\
+\
+\
+To increase the size of the color bar without changing the size of the plot, just pass a value to `base_scale` in `heatmap_legend()` without passing a value to `theme_cr()`
+
+```{r heatmap-biglegend}
+p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
+                           guide = heatmap_legend(base_scale = 1.5)) + 
+  theme_cr(cairo = TRUE, font = "")
+```
+
+The appearance of legends in `ggplot` can be further adjusted with the [`override.aes`](https://ggplot2.tidyverse.org/reference/guide_legend.html) argument of the `guide_legend()` function. For more information, see [this article](https://aosmith.rbind.io/2020/07/09/ggplot2-override-aes/) about the various applications of `override.aes()`. 

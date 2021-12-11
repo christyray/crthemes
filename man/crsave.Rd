@@ -39,7 +39,7 @@ image}
 
 \item{units}{Units for plot width; default is "in"}
 
-\item{dpi}{Resolution for plot image; default is 600}
+\item{dpi}{Resolution for plot image in pixels per inch; default is 600}
 
 \item{...}{Other arguments to be passed to the graphics device function or
 \code{\link[ggplot2]{ggsave}}}

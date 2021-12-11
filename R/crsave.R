@@ -13,7 +13,7 @@
 #' @param width Width of plot image; default is 6"
 #' @param ratio Aspect ratio of plot image; default is 1.5
 #' @param units Units for plot width; default is "in"
-#' @param dpi Resolution for plot image; default is 600
+#' @param dpi Resolution for plot image in pixels per inch; default is 600
 #' @param ... Other arguments to be passed to the graphics device function or
 #'   \code{\link[ggplot2]{ggsave}}
 #'

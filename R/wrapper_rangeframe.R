@@ -31,7 +31,7 @@ geom_rangeframe_cr <- function(xlim, ylim, ...) {
   ggthemes::geom_rangeframe(
     data = data,
     ggplot2::aes(.data$x, .data$y),
-    inherit.aes = FALSE,
+    inherit.aes = TRUE,
     ...
   )
 }

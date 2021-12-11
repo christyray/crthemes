@@ -1,0 +1,77 @@
+---
+title: "Range Frame Axes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Range Frame Axes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.asp = 2/3,
+  out.width = "75%",
+  dev = "ragg_png"
+)
+```
+
+```{r setup, include = FALSE}
+library(crthemes)
+library(ggplot2)
+```
+
+*Updated `r format(Sys.time(), "%b %d, %Y")`*
+\
+\
+The range frame is an alternative to the default x and y axes where the axes show the range of the data plotted. The [`ggthemes`](https://jrnold.github.io/ggthemes/) package provides [`geom_rangeframe()`](https://jrnold.github.io/ggthemes/reference/geom_rangeframe.html) for plotting range frame axes. 
+
+The `geom_rangeframe_cr()` function is a wrapper for the `ggthemes::geom_rangeframe()` function that allows the user to specify the limits for the range frame axes with `xlim` and `ylim`. `theme_rangeframe()` makes some slight modifications to `theme_cr()` to make it look nicer with the range frame axes. 
+
+## Examples
+
+The plot code used for the examples is below.
+
+```{r rf-setup}
+library(ggthemes)
+
+set.seed(306)
+x <- rnorm(200)
+df <- data.frame(x = x, y = x + rnorm(200, sd = 1.5), 
+                 z = x + rnorm(200, mean = 5, sd = 0.5))
+p <- ggplot(df, aes(x, y, color = z)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "X Axis", y = "Y Axis", color = NULL) 
+```
+
+The `ggplot2` default axes are below. `geom_rangeframe()` uses the plot aesthetics, including `color`. To override this, a color needs to be explicitly provided to `geom_rangeframe()`.
+
+Also, note that `coord_cartesian(clip = "off")` has to be used with `geom_rangeframe()` to make the full width of the range frame be shown. Without `coord_cartesian(clip = "off")`, the range frame lines are cut in half and the ends look strange with the rest of plot lines.
+
+```{r rf-default}
+p + geom_rangeframe(colour = "gray20") + 
+  coord_cartesian(clip = "off") +
+  theme_cr(cairo = TRUE, font = "")
+```
+\
+\
+\
+The `theme_rangeframe()` removes the axis line so the `geom_rangeframe()` lines are the only lines on the axis. It also lengthens and thickens the axis ticks to match the range frame. It takes the same arguments as `theme_cr()`. 
+
+```{r rf-crthemes}
+p + geom_rangeframe(colour = "gray20") + 
+  coord_cartesian(clip = "off") +
+  theme_rangeframe(cairo = TRUE, font = "")
+```
+\
+\
+\
+`geom_rangeframe_cr()` takes additional arguments of `xlim` and `ylim` (both must be provided) for the limits of the range frame on each axis. Any other `geom_*` arguments can also be passed to it, and they will be passed through to the `geom_rangeframe()` function. 
+
+```{r rf-diffrange}
+p + geom_rangeframe_cr(xlim = c(-3.5, 3.5), ylim = c(-6, 10), colour = "gray20") + 
+  coord_cartesian(clip = "off") +
+  theme_rangeframe(cairo = TRUE, font = "")
+```
