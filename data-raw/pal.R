@@ -130,6 +130,22 @@ pal$contrast$properties <- tibble::tibble(
   "Brightness" = "Standard"
 )
 
+# Contrast 3 Colors -------------------------------------------------------
+
+species <- c("highlight1", "highlight2", "highlight3")
+color <- c("green", "purple", "orange")
+hex <- c("#90B350", "#8C5383", "#F78154")
+
+pal$contrast3$colors <- tibble::tibble(species, color, hex)
+pal$contrast3$properties <- tibble::tibble(
+  "Name" = "contrast3",
+  "Key" = TRUE,
+  "Named" = TRUE,
+  "Type" = "Contrast",
+  "Length" = length(hex),
+  "Brightness" = "Standard"
+)
+
 # Antibodies Standard -----------------------------------------------------
 
 species <- c("Tocilizumab", "10H2", "BS1", "BS2")
