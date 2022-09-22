@@ -1,6 +1,6 @@
 Package: crthemes
 Title: A Standardized ggplot2 Theme for Visualizations
-Version: 0.0.1.9000
+Version: 0.0.2
 Authors@R:
     person("Christy", "Ray", , "cpickering@jhmi.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7552-9759"))
@@ -8,16 +8,16 @@ Description: A personal theme to use with ggplot2 for making visualizations for
     my thesis project. It is designed to simplify the process of creating
     publication-quality figures. It includes theme functions for scatter plots,
     bar graphs, and heat maps, and it also includes default color palettes and
-    fonts to use with the theme functions. 
+    fonts to use with the theme functions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 URL: https://github.com/cpicker4/crthemes
 BugReports: https://github.com/cpicker4/crthemes/issues
-Depends: 
+Depends:
     R (>= 2.10)
-Imports: 
+Imports:
     dplyr,
     ggplot2,
     scales,
@@ -31,7 +31,7 @@ Imports:
     svglite,
     grDevices,
     ggthemes
-Suggests: 
+Suggests:
     rmarkdown,
     knitr,
     testthat (>= 3.0.0),
