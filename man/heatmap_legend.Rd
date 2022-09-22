@@ -10,7 +10,7 @@ heatmap_legend(base_scale = 1, font = "Roboto Regular")
 \item{base_scale}{Scaling factor for the plot as a whole. A value of 1
 corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
-\item{font}{Font family to be used in the theme, given as character vector.
+\item{font}{Font family to be used in the theme, given as a character vector.
 The font must be included in the theme fonts; use
 \code{\link{font_names}()} to see a list of included fonts and
 \code{\link{font_preview}()} to preview a selected font.}
