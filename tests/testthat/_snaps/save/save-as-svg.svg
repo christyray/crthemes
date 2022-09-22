@@ -9,6 +9,9 @@
       stroke-linejoin: round;
       stroke-miterlimit: 10.00;
     }
+    .svglite text {
+      white-space: pre;
+    }
   ]]></style>
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
@@ -45,11 +48,11 @@
 </g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
 <polyline points='46.31,240.54 46.31,32.04 ' style='stroke-width: 1.02; stroke: #333333; stroke-linecap: butt;' />
-<text x='39.34' y='234.94' text-anchor='end' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='39.34' y='187.55' text-anchor='end' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='39.34' y='140.16' text-anchor='end' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='39.34' y='92.78' text-anchor='end' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='39.34' y='45.39' text-anchor='end' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='39.34' y='234.94' text-anchor='end' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='39.34' y='187.55' text-anchor='end' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='39.34' y='140.16' text-anchor='end' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='39.34' y='92.78' text-anchor='end' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='39.34' y='45.39' text-anchor='end' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>5</text>
 <polyline points='42.33,231.07 46.31,231.07 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='42.33,183.68 46.31,183.68 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='42.33,136.29 46.31,136.29 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
@@ -61,24 +64,24 @@
 <polyline points='205.37,244.53 205.37,240.54 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='277.67,244.53 277.67,240.54 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='349.97,244.53 349.97,240.54 ' style='stroke-width: 0.51; stroke: #333333; stroke-linecap: butt;' />
-<text x='60.77' y='255.26' text-anchor='middle' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='133.07' y='255.26' text-anchor='middle' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='205.37' y='255.26' text-anchor='middle' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='277.67' y='255.26' text-anchor='middle' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='349.97' y='255.26' text-anchor='middle' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='205.37' y='273.13' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; fill: #333333; font-family: Helvetica;' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>x</text>
-<text transform='translate(24.37,136.29) rotate(-90)' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; fill: #333333; font-family: Helvetica;' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>y</text>
+<text x='60.77' y='255.26' text-anchor='middle' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='133.07' y='255.26' text-anchor='middle' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='205.37' y='255.26' text-anchor='middle' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='277.67' y='255.26' text-anchor='middle' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='349.97' y='255.26' text-anchor='middle' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='205.37' y='273.13' text-anchor='middle' style='font-size: 13.20px; font-weight: bold;fill: #333333; font-family: "Helvetica";' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>x</text>
+<text transform='translate(24.37,136.29) rotate(-90)' text-anchor='middle' style='font-size: 13.20px; font-weight: bold;fill: #333333; font-family: "Helvetica";' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>y</text>
 <rect x='376.38' y='92.13' width='43.66' height='88.33' style='stroke-width: 0.51; stroke: none;' />
-<text x='382.36' y='109.06' style='font-size: 13.20px; font-weight: bold; fill: #333333; font-family: Helvetica;' textLength='6.60px' lengthAdjust='spacingAndGlyphs'>z</text>
+<text x='382.36' y='109.06' style='font-size: 13.20px; font-weight: bold;fill: #333333; font-family: "Helvetica";' textLength='6.60px' lengthAdjust='spacingAndGlyphs'>z</text>
 <rect x='382.36' y='117.09' width='19.13' height='19.13' style='stroke-width: 0.51; stroke: none;' />
 <circle cx='391.92' cy='126.66' r='2.22' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
 <rect x='382.36' y='136.22' width='19.13' height='19.13' style='stroke-width: 0.51; stroke: none;' />
 <circle cx='391.92' cy='145.78' r='2.22' style='stroke-width: 0.71; stroke: #00BA38; fill: #00BA38;' />
 <rect x='382.36' y='155.35' width='19.13' height='19.13' style='stroke-width: 0.51; stroke: none;' />
 <circle cx='391.92' cy='164.91' r='2.22' style='stroke-width: 0.71; stroke: #619CFF; fill: #619CFF;' />
-<text x='408.06' y='130.53' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text x='408.06' y='149.66' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>b</text>
-<text x='408.06' y='168.79' style='font-size: 10.80px; fill: #4D4D4D; font-family: Helvetica;' textLength='5.40px' lengthAdjust='spacingAndGlyphs'>c</text>
-<text x='205.37' y='22.75' text-anchor='middle' style='font-size: 15.00px; font-weight: bold; fill: #333333; font-family: Helvetica;' textLength='84.20px' lengthAdjust='spacingAndGlyphs'>save as svg</text>
+<text x='408.06' y='130.53' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>a</text>
+<text x='408.06' y='149.66' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>b</text>
+<text x='408.06' y='168.79' style='font-size: 10.80px;fill: #4D4D4D; font-family: "Helvetica";' textLength='5.40px' lengthAdjust='spacingAndGlyphs'>c</text>
+<text x='205.37' y='22.75' text-anchor='middle' style='font-size: 15.00px; font-weight: bold;fill: #333333; font-family: "Helvetica";' textLength='84.20px' lengthAdjust='spacingAndGlyphs'>save as svg</text>
 </g>
 </svg>

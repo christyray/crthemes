@@ -7,9 +7,10 @@
 #'   extension or `PNG` if no type or extension given
 #' @param device Which graphics device to use for saving; uses default devices
 #'   for main file types
-#' @param base_scale Scaling factor for the plot output, written to be
-#'   compatible with the theme scaling; factor of 1 corresponds to a 6" x 4"
-#'   image
+#' @param base_scale Scaling factor for the plot output, used to change the size
+#'   of the saved figure based on the scaling applied to the theme elements;
+#'   only applied if the `width` is not provided, otherwise, the `width` is
+#'   used; factor of 1 corresponds to a 6" x 4" image
 #' @param width Width of plot image; default is 6"
 #' @param ratio Aspect ratio of plot image; default is 1.5
 #' @param units Units for plot width; default is "in"
@@ -23,6 +24,17 @@ crsave <- function(plot_object, path = NULL, type = NULL, device = NULL,
                    base_scale = 1, width = NULL, ratio = 1.5, units = "in",
                    dpi = 600, ...) {
 
+  if (base_scale != 1 && !is.null(width)) {
+    warning(
+      "Values were supplied for both `base_scale` and `width`, so the `width`
+      argument will override the `base_scale` argument and the scaling will not
+      be applied.
+
+      To automatically determine the image width based on the scaling factor, do
+      not supply a value for `width`."
+    )
+  }
+
   plotname <- deparse1(substitute(plot_object, environment()))
   file <- path_create(plotname, path = path, type = type)
   path <- file[[1]]
@@ -30,7 +42,7 @@ crsave <- function(plot_object, path = NULL, type = NULL, device = NULL,
 
   device <- device %||% device_select(type)
 
-  width <- width %||% 6 * base_scale
+  width <- width %||% (6 * base_scale)
   height <- width / ratio
 
   ggplot2::ggsave(
