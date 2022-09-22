@@ -15,7 +15,7 @@
 #'   value of 1 will scale the font to the plot size. Larger numbers make the
 #'   font large compared to the plot size; smaller numbers make the font small
 #'   compared to the plot size.
-#' @param font Font family to be used in the theme, given as character vector.
+#' @param font Font family to be used in the theme, given as a character vector.
 #'   The font must be included in the theme fonts; use
 #'   \code{\link{font_names}()} to see a list of included fonts and
 #'   \code{\link{font_preview}()} to preview a selected font.
@@ -83,7 +83,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
   # Update the geom sizes based on the plot scaling, update color
   geom_scaling(scale_factor = base_scale, base_colour = base_colour)
 
-  theme_gray() %+replace%
+  theme_cr <- theme_gray() %+replace%
     theme(
       line = element_line(
         colour = base_colour,
@@ -247,4 +247,15 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
       plot.tag.position = "topleft",
       plot.margin = margin(font_size, font_size, font_size, font_size)
     )
+
+  # If the requested font is included in the package, re-register the bold font
+  # as the symbol font and reapply the bold font to the titles and labels as a
+  # separate font family to ensure that math formatting is also correctly bolded
+  # Only works if the font is included in the package because it checks for the
+  # path of the font file from the `font_table()`
+  if (font %in% font_names()) {
+    theme_cr <- theme_cr + fix_bold(font = font, symbol = symbol)
+  }
+
+  return(theme_cr)
 }

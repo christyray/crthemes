@@ -21,7 +21,7 @@ value of 1 will scale the font to the plot size. Larger numbers make the
 font large compared to the plot size; smaller numbers make the font small
 compared to the plot size.}
 
-\item{font}{Font family to be used in the theme, given as character vector.
+\item{font}{Font family to be used in the theme, given as a character vector.
 The font must be included in the theme fonts; use
 \code{\link{font_names}()} to see a list of included fonts and
 \code{\link{font_preview}()} to preview a selected font.}

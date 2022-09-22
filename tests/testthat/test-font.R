@@ -43,6 +43,43 @@ test_that("font_styles() returns a vector with font style information", {
   expect_snapshot_text("font_styles output", font_styles("Roboto Medium"))
 })
 
+# fix_bold() --------------------------------------------------------------
+
+test_that("fix_bold() adds the bold font to the registry if needed", {
+
+  # Clear and re-initialize the font registry without the symbol font
+  systemfonts::clear_registry()
+  theme_cr(font = "Roboto Regular", symbol = FALSE)
+
+  fix_bold(font = "Roboto Regular")
+  expect_equal(
+    nrow(dplyr::filter(font_table(), .data$family == "Roboto Black")), 0
+  )
+
+  fix_bold(font = "Roboto Bold")
+  expect_gt(
+    nrow(dplyr::filter(font_table(), .data$family == "Roboto Black")), 0
+  )
+})
+
+test_that("fix_bold() registers the symbol font if requested", {
+
+  # Clear and re-initialize the font registry without the symbol font
+  systemfonts::clear_registry()
+  theme_cr(font = "Roboto Regular", symbol = FALSE)
+
+  fix_bold(font = "Roboto Bold", symbol = FALSE)
+  expect_equal(nrow(dplyr::filter(font_table(), .data$family == "symbol")), 0)
+
+  fix_bold(font = "Roboto Bold", symbol = TRUE)
+  expect_gt(nrow(dplyr::filter(font_table(), .data$family == "symbol")), 0)
+
+  font_path <- systemfonts::registry_fonts() %>%
+    dplyr::filter(family == "symbol", style == "Regular")
+  font_path <- gsub(".*/", "", font_path$path)
+  expect_equal(font_path, "Roboto-Black.ttf")
+})
+
 # Visual tests ------------------------------------------------------------
 
 test_that("requested font is previewed", {
@@ -119,5 +156,53 @@ test_that("symbol font is used on plot when requested", {
   systemfonts::clear_registry()
   expect_snapshot_ragg("symbols are Roboto Bold font on ggplot",
                        p + theme_cr(font = "Roboto Bold", symbol = TRUE)
+  )
+})
+
+test_that("math text is formatted in bold in plot labels", {
+  df <- data.frame(x = 1:5, y = 1:5, z = c("a", "b", "c", "b", "c"))
+  p <- ggplot(df, aes(x, y, color = z)) +
+    geom_point() +
+    labs(
+      x = bquote(Delta ~ log[10]("Parameter")),
+      y = "Y-Axis Label",
+      color = bquote("Legend" ~ alpha ~ "and" ~ x^2 %+-% 2),
+      subtitle = "Subtitle Text",
+      caption = "Caption Text",
+      tag = "A"
+    )
+
+  systemfonts::clear_registry()
+  expect_snapshot_ragg(
+    "math text with original font and base symbols",
+    p + theme_cr(symbol = FALSE) +
+      theme(
+        axis.title = element_text(family = "Roboto Regular", face = "bold"),
+        legend.title = element_text(family = "Roboto Regular", face = "bold"),
+        strip.text = element_text(family = "Roboto Regular", face = "bold"),
+        plot.title = element_text(family = "Roboto Regular", face = "bold"),
+        plot.tag = element_text(family = "Roboto Regular", face = "bold")
+      )
+  )
+
+  expect_snapshot_ragg(
+    "math text with original font and matching symbols",
+    p + theme_cr(font = "Roboto Light") +
+      theme_cr(font = "Roboto Regular", symbol = FALSE) +
+      theme(
+        axis.title = element_text(family = "Roboto Regular", face = "bold"),
+        legend.title = element_text(family = "Roboto Regular", face = "bold"),
+        strip.text = element_text(family = "Roboto Regular", face = "bold"),
+        plot.title = element_text(family = "Roboto Regular", face = "bold"),
+        plot.tag = element_text(family = "Roboto Regular", face = "bold")
+      )
+  )
+
+  expect_snapshot_ragg("math text with default theme font",
+                       p + theme_cr()
+  )
+
+  expect_snapshot_ragg("math text with bolder font",
+                       p + theme_cr(font = "Roboto Bold")
   )
 })
