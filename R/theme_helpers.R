@@ -64,7 +64,7 @@ NULL
 theme_cut_top <- function() {
   theme(
     plot.margin = margin(t = 0),
-    strip.text = element_blank(),
+    strip.text.x = element_blank(),
     strip.background = element_blank()
   )
 }
@@ -74,10 +74,10 @@ theme_cut_top <- function() {
 theme_cut_bottom <- function() {
   theme(
     plot.margin = margin(b = 0),
-    axis.title.x = element_blank(),
-    axis.text.x = element_blank(),
-    axis.line.x = element_blank(),
-    axis.ticks.x = element_blank()
+    axis.title.x.bottom = element_blank(),
+    axis.text.x.bottom = element_blank(),
+    axis.line.x.bottom = element_blank(),
+    axis.ticks.x.bottom = element_blank()
   )
 }
 

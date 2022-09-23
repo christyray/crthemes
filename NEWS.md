@@ -1,5 +1,8 @@
 # crthemes (Development Version)
 
+- Added a function to apply the plot and font scaling factors to a plot without modifying other theme elements
+    - Useful for scaling plots that are already fully styled before saving
+
 # crthemes 0.0.2 (2022-09-22)
 
 - Added a new three-color palette named `contrast3`

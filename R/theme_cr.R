@@ -259,3 +259,118 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
 
   return(theme_cr)
 }
+
+#' Size scaling for plots with customized theme
+#'
+#' This function applies only the size-based theme modifications from the
+#' \code{\link{theme_cr}()} function. It does not include \code{%+replace%},
+#' so it can be applied on top of pre-existing theme modifications (e.g.,
+#' the \code{\link{theme_cut}()} functions).
+#'
+#' @param base_scale Scaling factor for the plot as a whole. A value of 1
+#'   corresponds to a font size of 12 pt and a figure size of 6" by 4"
+#' @param font_scale Scaling factor for the font as compared to the plot. A
+#'   value of 1 will scale the font to the plot size. Larger numbers make the
+#'   font large compared to the plot size; smaller numbers make the font small
+#'   compared to the plot size.
+#' @param set_margin Flag for whether or not to change the plot margin from the
+#'   baseline. Used as a separate option because it is difficult to specifically
+#'   adjust when plots are combined.
+#'
+#' @return A list containing the theme properties.
+#'
+#' @importFrom ggplot2 theme element_line element_rect element_text
+#'   element_blank margin rel
+#' @importFrom grid unit
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'
+#' df <- data.frame(x = 1:5, y = 1:5, z = c("a", "b", "c", "b", "c"))
+#' p <- ggplot(df, aes(x, y, color = z)) + geom_point()
+#'
+#'\dontrun{
+#' p + theme_cr() # Uses default scaling and font
+#'
+#' # Multiply height and width of the plot by 2
+#' p + theme_cr() + apply_scaling(base_scale = 2)
+#'
+#' # Divide height and width of plot by 2 but keep original font size
+#' p + theme_cr() + apply_scaling(base_scale = 0.5, font_scale = 2)
+#'
+#' # Multiply height and wdith of the plot by 2 but do not change the margins
+#' p + theme_cr() + apply_scaling(base_scale = 2, set_margin = FALSE)
+#'}
+
+apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
+
+  # Define sizing based on input scale
+  base_size <- base_scale*12
+  base_line_size <- base_size/50
+  base_rect_size <- base_size/50
+
+  # Apply the font scale to the font size
+  font_size <- base_size*font_scale
+
+  # Update the geom sizes based on the plot scaling, update color
+  geom_scaling(scale_factor = base_scale)
+
+  scaled_theme <- theme(
+    line = element_line(size = base_line_size),
+    rect = element_rect(size = base_rect_size),
+    text = element_text(size = font_size),
+
+    axis.line = element_line(size = base_line_size*2),
+    axis.text = element_text(size = rel(0.9)),
+    axis.text.x = element_text(margin = margin(t = font_size/4)),
+    axis.text.x.top = element_text(margin = margin(b = font_size/4)),
+    axis.text.y = element_text(margin = margin(r = font_size/4)),
+    axis.text.y.right = element_text(margin = margin(l = font_size/4)),
+    axis.ticks.length = unit(font_size/3, "pt"),
+    axis.title = element_text(size = rel(1.1)),
+    axis.title.x = element_text(margin = margin(t = font_size/2)),
+    axis.title.x.top = element_text(margin = margin(b = font_size/2)),
+    axis.title.y = element_text(margin = margin(r = font_size*0.75)),
+    axis.title.y.right = element_text(margin = margin(l = font_size*0.75)),
+
+    legend.spacing = unit(font_size*2, "pt"),
+    legend.margin = margin(font_size/2, font_size/2, font_size/2, font_size/2),
+    legend.key.size = unit(font_size*1.6, "pt"),
+    legend.text = element_text(size = rel(0.9)),
+    legend.title = element_text(size = rel(1.1)),
+    legend.box.margin = margin(0, 0, 0, 0),
+    legend.box.spacing = unit(font_size, "pt"),
+
+    panel.grid = element_line(size = base_line_size),
+    panel.spacing = unit(font_size, "pt"),
+
+    strip.background = element_rect(size = base_line_size*4),
+    strip.text = element_text(
+      margin = margin(font_size/4, font_size/4, font_size/4, font_size/4)
+    ),
+    strip.switch.pad.grid = unit(font_size/4, "pt"),
+    strip.switch.pad.wrap = unit(font_size/4, "pt"),
+
+    plot.title = element_text(
+      size = rel(1.25),
+      margin = margin(b = font_size/2)
+    ),
+    plot.subtitle = element_text(
+      size = rel(0.95),
+      margin = margin(b = font_size/2)
+    ),
+    plot.caption = element_text(
+      size = rel(0.8),
+      margin = margin(t = font_size/2)
+    ),
+    plot.tag = element_text(size = rel(1.25))
+  )
+
+  if (set_margin == TRUE) {
+    scaled_theme <- scaled_theme +
+      theme(plot.margin = margin(font_size, font_size, font_size, font_size))
+  }
+
+  return(scaled_theme)
+}

@@ -67,6 +67,56 @@ test_that("plot and font scaling is correct", {
 
 })
 
+test_that("plot and font scaling is correctly applied after plotting", {
+  df <- data.frame(x = 1:5, y = 1:5, z = c("a", "a", "b", "b", "a"))
+  p <- ggplot(df, aes(x, y, color = z)) +
+    geom_point() +
+    labs(
+      x = "X-Axis Label",
+      y = "Y-Axis Label",
+      color = "Legend",
+      subtitle = "Subtitle Text",
+      caption = "Caption Text",
+      tag = "A"
+    )
+
+  expect_snapshot_plot("plot and font are default size",
+    p + theme_cr(cairo = TRUE, font = ""),
+    width = 6, height = 4
+  )
+
+  expect_snapshot_plot("apply scaling to large plot",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(base_scale = 1.5),
+    width = 9, height = 6
+  )
+
+  expect_snapshot_plot("apply scaling to small plot",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(base_scale = 2/3),
+    width = 4, height = 2.667
+  )
+
+  expect_snapshot_plot("increase font size",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(font_scale = 1.5),
+    width = 6, height = 4
+  )
+
+  expect_snapshot_plot("decrease font size",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(font_scale = 2/3),
+    width = 6, height = 4
+  )
+
+  expect_snapshot_plot("zoom in on plot",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(base_scale = 1.5),
+    width = 6, height = 4
+  )
+
+  expect_snapshot_plot("zoom out on plot",
+    p + theme_cr(cairo = TRUE, font = "") + apply_scaling(base_scale = 2/3),
+    width = 6, height = 4
+  )
+
+})
+
 test_that("geom_rangeframe is applied", {
   df <- data.frame(x = 1:5, y = 1:5, z = c("a", "a", "b", "b", "a"))
   p <- ggplot(df, aes(x, y, color = z)) +
