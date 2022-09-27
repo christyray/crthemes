@@ -200,7 +200,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
       strip.background = element_rect(
         fill = "transparent",
         colour = base_colour,
-        size = base_line_size*4
+        size = base_line_size*2
       ),
       strip.text = element_text(
         colour = base_colour,
@@ -345,7 +345,7 @@ apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
     panel.grid = element_line(size = base_line_size),
     panel.spacing = unit(font_size, "pt"),
 
-    strip.background = element_rect(size = base_line_size*4),
+    strip.background = element_rect(size = base_line_size*2),
     strip.text = element_text(
       margin = margin(font_size/4, font_size/4, font_size/4, font_size/4)
     ),
