@@ -81,7 +81,11 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
   base_colour_light <- "gray80"
 
   # Update the geom sizes based on the plot scaling, update color
-  geom_scaling(scale_factor = base_scale, base_colour = base_colour)
+  geom_scaling(
+    scale_factor = base_scale,
+    font = font,
+    base_colour = base_colour
+  )
 
   theme_cr <- theme_gray() %+replace%
     theme(
@@ -198,7 +202,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
       panel.ontop = FALSE,
 
       strip.background = element_rect(
-        fill = "transparent",
+        fill = "gray90",
         colour = base_colour,
         size = base_line_size*2
       ),

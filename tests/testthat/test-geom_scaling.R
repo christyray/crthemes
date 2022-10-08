@@ -1,9 +1,12 @@
 library(ggplot2)
 
 test_that("geoms scale with plot size", {
+  txt <- data.frame(displ = c(2, 4, 6), hwy = c(15, 32, 29), cyl = c(4, 6, 8))
   p <- ggplot(ggplot2::mpg, aes(displ, hwy, color = as.factor(cyl))) +
     geom_point(alpha = 0.6) +
     geom_smooth(se = FALSE, method = "loess", formula = "y ~ x") +
+    geom_vline(xintercept = 3, linetype = "dashed") +
+    geom_text(data = txt, label = c("Label1", "Label2", "Label3")) +
     labs(
       x = "X-Axis Label",
       y = "Y-Axis Label",
@@ -11,7 +14,8 @@ test_that("geoms scale with plot size", {
       subtitle = "Subtitle Text",
       caption = "Caption Text",
       tag = "A"
-    )
+    ) +
+    guides(color = guide_legend(override.aes = aes(label = "")))
 
   expect_snapshot_ragg("smallest size",
                        p + theme_cr(base_scale = 0.5),
@@ -41,9 +45,12 @@ test_that("geoms scale with plot size", {
 })
 
 test_that("geoms scale with plot size, base R graphics", {
+  txt <- data.frame(displ = c(2, 4, 6), hwy = c(15, 32, 29), cyl = c(4, 6, 8))
   p <- ggplot(ggplot2::mpg, aes(displ, hwy, color = as.factor(cyl))) +
     geom_point(alpha = 0.6) +
     geom_smooth(se = FALSE, method = "loess", formula = "y ~ x") +
+    geom_vline(xintercept = 3, linetype = "dashed") +
+    geom_text(data = txt, label = c("Label1", "Label2", "Label3")) +
     labs(
       x = "X-Axis Label",
       y = "Y-Axis Label",
@@ -51,7 +58,8 @@ test_that("geoms scale with plot size, base R graphics", {
       subtitle = "Subtitle Text",
       caption = "Caption Text",
       tag = "A"
-    )
+    ) +
+    guides(color = guide_legend(override.aes = aes(label = "")))
 
   expect_snapshot_plot("smallest size base R",
                        p + theme_cr(base_scale = 0.5, cairo = TRUE, font = ""),
