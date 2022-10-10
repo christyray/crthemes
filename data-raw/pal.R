@@ -133,8 +133,8 @@ pal$contrast$properties <- tibble::tibble(
 # Contrast 3 Colors -------------------------------------------------------
 
 species <- c("highlight1", "highlight2", "highlight3")
-color <- c("green", "purple", "orange")
-hex <- c("#90B350", "#8C5383", "#F78154")
+color <- c("green", "orange", "purple")
+hex <- c("#90B350", "#F78154", "#9A4C95")
 
 pal$contrast3$colors <- tibble::tibble(species, color, hex)
 pal$contrast3$properties <- tibble::tibble(
@@ -148,9 +148,9 @@ pal$contrast3$properties <- tibble::tibble(
 
 # Antibodies Standard -----------------------------------------------------
 
-species <- c("Tocilizumab", "10H2", "BS1", "BS2")
-color <- c("blue", "red", "green", "orange")
-hex <- c("#38788C", "#A63F4D", "#90B350", "#D99857")
+species <- c("Tocilizumab", "10H2", "BS1", "BS2", "Tocilizumab + 10H2")
+color <- c("blue", "red", "purple", "orange", "green")
+hex <- c("#2983B1", "#C84D4C", "#9767AF", "#E7945A", "#6DA34D")
 
 pal$antibodies$colors <- tibble::tibble(species, color, hex)
 pal$antibodies$properties <- tibble::tibble(
@@ -164,14 +164,14 @@ pal$antibodies$properties <- tibble::tibble(
 
 # Antibodies Dark ---------------------------------------------------------
 
-species <- c("Tocilizumab", "10H2", "BS1", "BS2")
-color <- c("blue", "red", "green", "orange")
-hex <- c("#275361", "#6F323A", "#64773F", "#A16B36")
+species <- c("Tocilizumab", "10H2", "BS1", "BS2", "Tocilizumab + 10H2")
+color <- c("blue", "red", "purple", "orange", "green")
+hex <- c("#1D4E67", "#7A2B2B", "#5C3D6C", "#A15620", "#426030")
 
 pal$antibodies_dark$colors <- tibble::tibble(species, color, hex)
 pal$antibodies_dark$properties <- tibble::tibble(
   "Name" = "antibodies_dark",
-  "Key" = FALSE,
+  "Key" = TRUE,
   "Named" = TRUE,
   "Type" = "Antibodies",
   "Length" = length(hex),
@@ -180,13 +180,77 @@ pal$antibodies_dark$properties <- tibble::tibble(
 
 # Antibodies Light --------------------------------------------------------
 
-species <- c("Tocilizumab", "10H2", "BS1", "BS2")
-color <- c("blue", "red", "green", "orange")
-hex <- c("#68A4B6", "#C07983", "#B2CA85", "#E5B88B")
+species <- c("Tocilizumab", "10H2", "BS1", "BS2", "Tocilizumab + 10H2")
+color <- c("blue", "red", "purple", "orange", "green")
+hex <- c("#60ACD2", "#D48585", "#B698C5", "#E9B691", "#98C081")
 
 pal$antibodies_light$colors <- tibble::tibble(species, color, hex)
 pal$antibodies_light$properties <- tibble::tibble(
   "Name" = "antibodies_light",
+  "Key" = TRUE,
+  "Named" = TRUE,
+  "Type" = "Antibodies",
+  "Length" = length(hex),
+  "Brightness" = "Light"
+)
+
+# Antibodies Faint --------------------------------------------------------
+
+species <- c("Tocilizumab", "10H2", "BS1", "BS2", "Tocilizumab + 10H2")
+color <- c("blue", "red", "purple", "orange", "green")
+hex <- c("#D3E7F1", "#F5D7D7", "#EBDEF2", "#F8E5D8", "#DFF1D6")
+
+pal$antibodies_faint$colors <- tibble::tibble(species, color, hex)
+pal$antibodies_faint$properties <- tibble::tibble(
+  "Name" = "antibodies_faint",
+  "Key" = TRUE,
+  "Named" = TRUE,
+  "Type" = "Antibodies",
+  "Length" = length(hex),
+  "Brightness" = "Faint"
+)
+
+# Antibodies Original -----------------------------------------------------
+
+species <- c("Tocilizumab", "10H2", "BS1", "BS2")
+color <- c("blue", "red", "green", "orange")
+hex <- c("#38788C", "#A63F4D", "#90B350", "#D99857")
+
+pal$antibodies4$colors <- tibble::tibble(species, color, hex)
+pal$antibodies4$properties <- tibble::tibble(
+  "Name" = "antibodies4",
+  "Key" = TRUE,
+  "Named" = TRUE,
+  "Type" = "Antibodies",
+  "Length" = length(hex),
+  "Brightness" = "Standard"
+)
+
+# Antibodies Orig Dark ----------------------------------------------------
+
+species <- c("Tocilizumab", "10H2", "BS1", "BS2")
+color <- c("blue", "red", "green", "orange")
+hex <- c("#275361", "#6F323A", "#64773F", "#A16B36")
+
+pal$antibodies4_dark$colors <- tibble::tibble(species, color, hex)
+pal$antibodies4_dark$properties <- tibble::tibble(
+  "Name" = "antibodies4_dark",
+  "Key" = FALSE,
+  "Named" = TRUE,
+  "Type" = "Antibodies",
+  "Length" = length(hex),
+  "Brightness" = "Dark"
+)
+
+# Antibodies Orig Light ---------------------------------------------------
+
+species <- c("Tocilizumab", "10H2", "BS1", "BS2")
+color <- c("blue", "red", "green", "orange")
+hex <- c("#68A4B6", "#C07983", "#B2CA85", "#E5B88B")
+
+pal$antibodies4_light$colors <- tibble::tibble(species, color, hex)
+pal$antibodies4_light$properties <- tibble::tibble(
+  "Name" = "antibodies4_light",
   "Key" = FALSE,
   "Named" = TRUE,
   "Type" = "Antibodies",
