@@ -81,12 +81,9 @@ draw_key_polygon2 <- function(data, params, size, scale = 0.8) {
 #'     scale_fill_distiller(palette = "YlGn", guide = heatmap_legend())
 
 heatmap_legend <- function(base_scale = 1, font = "Roboto Regular") {
-  base_size <- base_scale*12
 
   ggplot2::guide_colourbar(
-    draw.ulim = FALSE,
-    draw.llim = FALSE,
     barheight = 12*base_scale,
-    ticks.linewidth = 1*base_scale
+    ticks.linewidth = 0.5*base_scale
   )
 }
