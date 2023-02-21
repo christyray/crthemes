@@ -65,7 +65,7 @@ theme_cut_top <- function() {
   theme(
     plot.margin = margin(t = 0),
     strip.text.x = element_blank(),
-    strip.background = element_blank()
+    strip.background.x = element_blank()
   )
 }
 
