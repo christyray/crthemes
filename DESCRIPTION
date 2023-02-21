@@ -1,8 +1,8 @@
 Package: crthemes
 Title: A Standardized ggplot2 Theme for Visualizations
-Version: 0.0.2.9000
+Version: 0.1.0
 Authors@R:
-    person("Christy", "Ray", , "cpickering@jhmi.edu", role = c("aut", "cre"),
+    person("Christy", "Ray", , "christyray@jhmi.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7552-9759"))
 Description: A personal theme to use with ggplot2 for making visualizations for
     my thesis project. It is designed to simplify the process of creating

@@ -1,7 +1,14 @@
-# crthemes (Development Version)
+# crthemes 0.1.0 (2023-02-21)
 
+- Updated the package to work with the facet styling from `ggh4x` instead of `ggplot`
+    - Specifically using `clip = "off"` by default, so the border width is now halved so it will display appropriately with the clipping off
 - Added a function to apply the plot and font scaling factors to a plot without modifying other theme elements
     - Useful for scaling plots that are already fully styled before saving
+- Fixed the `theme_cut_*()` functions to be more specific and interact correctly with theme scaling
+    - Also fixed Y-axis facet styling so it is not impacted by the cut functions
+- Added additional color palettes and modified the `contrast3` palette to be more distinct
+- Added plot size scaling for `abline`, `vline`, `hline`, and `text` geoms, so they will now automatically scale as the plot size changes
+    - Also set default color and plot for these geoms, similar to the original geoms
 
 # crthemes 0.0.2 (2022-09-22)
 
