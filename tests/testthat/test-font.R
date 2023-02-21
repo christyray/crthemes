@@ -32,7 +32,7 @@ test_that("font_names() returns a character vector", {
 
 test_that("font_table() returns a tibble with all registered fonts", {
   expect_s3_class(font_table(), "tbl_df")
-  table <- dplyr::select(font_table(), !features)
+  table <- dplyr::select(font_table(), !"features")
   expect_snapshot_text("font_table output", table)
 })
 
@@ -75,7 +75,7 @@ test_that("fix_bold() registers the symbol font if requested", {
   expect_gt(nrow(dplyr::filter(font_table(), .data$family == "symbol")), 0)
 
   font_path <- systemfonts::registry_fonts() %>%
-    dplyr::filter(family == "symbol", style == "Regular")
+    dplyr::filter(.data$family == "symbol", .data$style == "Regular")
   font_path <- gsub(".*/", "", font_path$path)
   expect_equal(font_path, "Roboto-Black.ttf")
 })

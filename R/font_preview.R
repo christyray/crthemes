@@ -100,11 +100,11 @@ font_styles <- function(font = "Roboto Regular") {
 font_table <- function() {
   systemfonts::registry_fonts() %>%
     dplyr::select(
-      .data$family,
-      .data$style,
-      .data$weight,
-      .data$italic,
-      .data$features
+      "family",
+      "style",
+      "weight",
+      "italic",
+      "features"
     ) %>%
     dplyr::arrange(.data$family)
 }
