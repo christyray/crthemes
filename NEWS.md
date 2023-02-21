@@ -1,4 +1,6 @@
-# crthemes (Development Version)
+# crthemes 0.1.1 (2023-02-21)
+
+- Hotfix to incorporate necessary changes after updating to `tidyselect` v1.2.0 and `ggplot2` v3.4.0
 
 # crthemes 0.1.0 (2023-02-21)
 
