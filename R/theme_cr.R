@@ -91,14 +91,14 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
     theme(
       line = element_line(
         colour = base_colour,
-        size = base_line_size,
+        linewidth = base_line_size,
         linetype = 1,
         lineend = "butt"
       ),
       rect = element_rect(
         fill = "transparent",
         colour = base_colour,
-        size = base_rect_size,
+        linewidth = base_rect_size,
         linetype = 1
       ),
       text = element_text(
@@ -115,7 +115,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
 
       axis.line = element_line(
         colour = base_colour,
-        size = base_line_size*2,
+        linewidth = base_line_size*2,
         linetype = 1,
         lineend = "butt"
       ),
@@ -195,7 +195,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
       panel.border = element_blank(),
       panel.grid = element_line(
         colour = base_colour_light,
-        size = base_line_size
+        linewidth = base_line_size
       ),
       panel.grid.minor = element_blank(),
       panel.spacing = unit(font_size, "pt"),
@@ -204,7 +204,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
       strip.background = element_rect(
         fill = "gray90",
         colour = base_colour,
-        size = base_line_size*2
+        linewidth = base_line_size*2
       ),
       strip.text = element_text(
         colour = base_colour,
@@ -321,11 +321,11 @@ apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
   geom_scaling(scale_factor = base_scale)
 
   scaled_theme <- theme(
-    line = element_line(size = base_line_size),
-    rect = element_rect(size = base_rect_size),
+    line = element_line(linewidth = base_line_size),
+    rect = element_rect(linewidth = base_rect_size),
     text = element_text(size = font_size),
 
-    axis.line = element_line(size = base_line_size*2),
+    axis.line = element_line(linewidth = base_line_size*2),
     axis.text = element_text(size = rel(0.9)),
     axis.text.x = element_text(margin = margin(t = font_size/4)),
     axis.text.x.top = element_text(margin = margin(b = font_size/4)),
@@ -346,10 +346,10 @@ apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
     legend.box.margin = margin(0, 0, 0, 0),
     legend.box.spacing = unit(font_size, "pt"),
 
-    panel.grid = element_line(size = base_line_size),
+    panel.grid = element_line(linewidth = base_line_size),
     panel.spacing = unit(font_size, "pt"),
 
-    strip.background = element_rect(size = base_line_size*2),
+    strip.background = element_rect(linewidth = base_line_size*2),
     strip.text = element_text(
       margin = margin(font_size/4, font_size/4, font_size/4, font_size/4)
     ),

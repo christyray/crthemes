@@ -71,7 +71,7 @@ theme_rangeframe <- function(base_scale = 1, font_scale = 1,
   theme_cr(base_scale = base_scale, font_scale = font_scale, font = font,
            symbol = symbol, cairo = cairo) +
     theme(axis.line = element_blank(),
-          axis.ticks = element_line(size = base_scale*0.5),
+          axis.ticks = element_line(linewidth = base_scale*0.5),
           axis.ticks.length = unit(font_size/2, "pt")
     )
 }
