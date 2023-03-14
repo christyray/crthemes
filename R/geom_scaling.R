@@ -25,6 +25,17 @@ geom_scaling <- function(
     fontface = "bold",
     color = base_colour
   ))
+  ggplot2::update_geom_defaults("errorbar", list(
+    # Although the default width can be updated, it currently is not applied to
+    # the plots and is instead always 0.5
+    width = 0.25*scale_factor,
+    linewidth = 0.5*scale_factor,
+    color = "gray40"
+  ))
+  ggplot2::update_geom_defaults("errorbarh", list(linewidth = 0.5*scale_factor))
+  ggplot2::update_geom_defaults("crossbar", list(linewidth = 0.5*scale_factor))
+  ggplot2::update_geom_defaults("linerange", list(linewidth = 0.5*scale_factor))
+  ggplot2::update_geom_defaults("pointrange", list(linewidth = 0.5*scale_factor))
   ggplot2::update_geom_defaults("RangeFrame", list(
     size = 0.5*scale_factor,
     colour = base_colour
