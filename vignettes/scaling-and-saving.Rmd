@@ -26,13 +26,13 @@ library(crthemes)
 *Updated `r format(Sys.time(), "%b %d, %Y")`*
 \
 \
-The default `theme_cr()` is designed for a 6" by 4" figure with font size of 12 pt. The `base_scale` and `font_scale` arguments of `theme_cr()` can be used to change the scaling of the plot features and the font for larger or smaller outputs. 
+The default `theme_cr()` is designed for a 6" by 4" figure with font size of 12 pt. The `plot_scale` and `font_scale` arguments of `theme_cr()` can be used to change the scaling of the plot features and the font for larger or smaller outputs. 
 
 Note that none of the code in this vignette is run, and the plots are not displayed. If it were run, the saved plot output would be too large to render within a vignette. 
 
-## `base_scale`
+## `plot_scale`
 
-`base_scale` changes the size of lines, rectangles, `geoms`, and font and the spacing of plot features. It has a default value of 1, which corresponds to a 6" by 4" figure. Larger values will increase the size of the plot features multiplicatively, and smaller values will decrease the size of plot features in the same way. 
+`plot_scale` changes the size of lines, rectangles, `geoms`, and font and the spacing of plot features. It has a default value of 1, which corresponds to a 6" by 4" figure. Larger values will increase the size of the plot features multiplicatively, and smaller values will decrease the size of plot features in the same way. 
 
 The plot size is set with `crsave()`, as described below. 
 
@@ -40,24 +40,24 @@ The plot size is set with `crsave()`, as described below.
 # p represents a ggplot object
 
 # Default size
-p + theme_cr(base_scale = 1)
+p + theme_cr(plot_scale = 1)
 
 # Larger plot
-p + theme_cr(base_scale = 1.5)
+p + theme_cr(plot_scale = 1.5)
 ```
 
 ## `font_scale`
 
-`font_scale` determines how the font should be sized relative to the rest of the plot. With the default value of 1, the font will be scaled according to the `base_scale` value. For example, a `base_scale` value of 2 and a `font_scale` value of 1 will give a font size of 24, corresponding to the increased size of the plot from `base_scale`.
+`font_scale` determines how the font should be sized relative to the rest of the plot. With the default value of 1, the font will be scaled according to the `plot_scale` value. For example, a `plot_scale` value of 2 and a `font_scale` value of 1 will give a font size of 24, corresponding to the increased size of the plot from `plot_scale`.
 
 Changing the `font_scale` value will make the font larger or smaller compared to the plot features. This can be helpful for making font bigger on a small figure where legibility is more important than the size of the data on the figure. 
 
 ```{r, eval=FALSE}
 # Smaller plot with font twice as large as the default for that plot size
-p + theme_cr(base_scale = 0.5, font_scale = 2)
+p + theme_cr(plot_scale = 0.5, font_scale = 2)
 
 # Normal plot size with smaller font
-p + theme_cr(base_scale = 1, font_scale = 0.75)
+p + theme_cr(plot_scale = 1, font_scale = 0.75)
 ```
 
 ## `crsave()`

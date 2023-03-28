@@ -124,7 +124,7 @@ p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1) +
 \
 \
 \
-`heatmap_legend()` is passed to the `guide` argument of the `scale_fill_*()` function. It only has one argument, `base_scale`, which corresponds to the `base_scale` argument of the `theme_cr` function and has a default value of `1`. The default creates a 6" by 4" plot with a font size of 12 pt.
+`heatmap_legend()` is passed to the `guide` argument of the `scale_fill_*()` function. It only has one argument, `plot_scale`, which corresponds to the `plot_scale` argument of the `theme_cr` function and has a default value of `1`. The default creates a 6" by 4" plot with a font size of 12 pt.
 
 ```{r heatmap-crthemes}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
@@ -135,24 +135,24 @@ p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1,
 \
 \
 \
-When the plot size is increased through the `base_scale` argument in `theme_cr()`, the same value should be passed to `heatmap_legend()` to scale the color bar with the plot size.
+When the plot size is increased through the `plot_scale` argument in `theme_cr()`, the same value should be passed to `heatmap_legend()` to scale the color bar with the plot size.
 
 The scaling is designed to be used with the `crsave()` function; here, it will appear as larger font and a larger color bar in the same plot size.
 
 ```{r heatmap-bigplot}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
-                           guide = heatmap_legend(base_scale = 1.5)) + 
-  theme_cr(base_scale = 1.5)
+                           guide = heatmap_legend(plot_scale = 1.5)) + 
+  theme_cr(plot_scale = 1.5)
 ```
 
 \
 \
 \
-To increase the size of the color bar without changing the size of the plot, just pass a value to `base_scale` in `heatmap_legend()` without passing a value to `theme_cr()`
+To increase the size of the color bar without changing the size of the plot, just pass a value to `plot_scale` in `heatmap_legend()` without passing a value to `theme_cr()`
 
 ```{r heatmap-biglegend}
 p + scale_fill_paletteer_c("pals::ocean.tempo", direction = -1, 
-                           guide = heatmap_legend(base_scale = 1.5)) + 
+                           guide = heatmap_legend(plot_scale = 1.5)) + 
   theme_cr()
 ```
 

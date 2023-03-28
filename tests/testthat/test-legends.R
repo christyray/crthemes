@@ -35,13 +35,13 @@ test_that("legend spacing scales with plot scale", {
 
   expect_snapshot_plot("bar graph plot size increased",
     p + geom_col(key_glyph = "polygon2") +
-      theme_cr(base_scale = 1.5, cairo = TRUE, font = ""),
+      theme_cr(plot_scale = 1.5, cairo = TRUE, font = ""),
     width = 9, height = 6
   )
 
   expect_snapshot_plot("bar graph plot size decreased",
     p + geom_col(key_glyph = "polygon2") +
-      theme_cr(base_scale = 2/3, cairo = TRUE, font = ""),
+      theme_cr(plot_scale = 2/3, cairo = TRUE, font = ""),
     width = 4, height = 2.667
   )
 })
@@ -73,14 +73,14 @@ test_that("heatmap legend scales with plot scale", {
   )
 
   expect_snapshot_plot("heatmap legend plot size increased",
-    p + theme_cr(base_scale = 1.5, cairo = TRUE, font = "") +
-      scale_fill_binned(guide = heatmap_legend(base_scale = 1.5)),
+    p + theme_cr(plot_scale = 1.5, cairo = TRUE, font = "") +
+      scale_fill_binned(guide = heatmap_legend(plot_scale = 1.5)),
     width = 9, height = 6
   )
 
   expect_snapshot_plot("heatmap legend plot size decreased",
-    p + theme_cr(base_scale = 2/3, cairo = TRUE, font = "") +
-      scale_fill_binned(guide = heatmap_legend(base_scale = 2/3)),
+    p + theme_cr(plot_scale = 2/3, cairo = TRUE, font = "") +
+      scale_fill_binned(guide = heatmap_legend(plot_scale = 2/3)),
     width = 4, height = 2.667
   )
 })
@@ -92,14 +92,14 @@ test_that("plot space is removed with expand0()", {
   p <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
     geom_raster() +
     scale_fill_binned() +
-    theme_cr(base_scale = 1, cairo = TRUE, font = "")
+    theme_cr(plot_scale = 1, cairo = TRUE, font = "")
 
   df <- data.frame(
     x = factor(c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R"),
                levels = c("IL6R", "IL8R", "IL6R-Ab", "IL8R-Ab", "IL6R-Ab-IL8R")),
     y = c(0.45, 0.78, 0.61, 0.31, 0.72))
   p1 <- ggplot(df, aes(x, y, fill = x)) + geom_col() +
-    theme_cr(base_scale = 1, cairo = TRUE, font = "")
+    theme_cr(plot_scale = 1, cairo = TRUE, font = "")
 
   expect_snapshot_plot("no space on plot",
     p +

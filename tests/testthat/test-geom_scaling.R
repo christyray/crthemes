@@ -18,27 +18,27 @@ test_that("geoms scale with plot size", {
     guides(color = guide_legend(override.aes = aes(label = "")))
 
   expect_snapshot_ragg("smallest size",
-                       p + theme_cr(base_scale = 0.5),
+                       p + theme_cr(plot_scale = 0.5),
                        width = 3, height = 2
   )
 
   expect_snapshot_ragg("small size",
-                       p + theme_cr(base_scale = 2/3),
+                       p + theme_cr(plot_scale = 2/3),
                        width = 4, height = 2.667
   )
 
   expect_snapshot_ragg("normal size",
-                       p + theme_cr(base_scale = 1),
+                       p + theme_cr(plot_scale = 1),
                        width = 6, height = 4
   )
 
   expect_snapshot_ragg("large size",
-                       p + theme_cr(base_scale = 1.5),
+                       p + theme_cr(plot_scale = 1.5),
                        width = 9, height = 6
   )
 
   expect_snapshot_ragg("largest size",
-                       p + theme_cr(base_scale = 2),
+                       p + theme_cr(plot_scale = 2),
                        width = 12, height = 8
   )
 
@@ -48,27 +48,27 @@ test_that("geoms scale with plot size", {
     geom_errorbar()
 
   expect_snapshot_ragg("smallest size error bar",
-                       eb + theme_cr(base_scale = 0.5),
+                       eb + theme_cr(plot_scale = 0.5),
                        width = 3, height = 2
   )
 
   expect_snapshot_ragg("small size error bar",
-                       eb + theme_cr(base_scale = 2/3),
+                       eb + theme_cr(plot_scale = 2/3),
                        width = 4, height = 2.667
   )
 
   expect_snapshot_ragg("normal size error bar",
-                       eb + theme_cr(base_scale = 1),
+                       eb + theme_cr(plot_scale = 1),
                        width = 6, height = 4
   )
 
   expect_snapshot_ragg("large size error bar",
-                       eb + theme_cr(base_scale = 1.5),
+                       eb + theme_cr(plot_scale = 1.5),
                        width = 9, height = 6
   )
 
   expect_snapshot_ragg("largest size error bar",
-                       eb + theme_cr(base_scale = 2),
+                       eb + theme_cr(plot_scale = 2),
                        width = 12, height = 8
   )
 
@@ -92,27 +92,27 @@ test_that("geoms scale with plot size, base R graphics", {
     guides(color = guide_legend(override.aes = aes(label = "")))
 
   expect_snapshot_plot("smallest size base R",
-                       p + theme_cr(base_scale = 0.5, cairo = TRUE, font = ""),
+                       p + theme_cr(plot_scale = 0.5, cairo = TRUE, font = ""),
                        width = 3, height = 2
   )
 
   expect_snapshot_plot("small size base R",
-                       p + theme_cr(base_scale = 2/3, cairo = TRUE, font = ""),
+                       p + theme_cr(plot_scale = 2/3, cairo = TRUE, font = ""),
                        width = 4, height = 2.667
   )
 
   expect_snapshot_plot("normal size base R",
-                       p + theme_cr(base_scale = 1, cairo = TRUE, font = ""),
+                       p + theme_cr(plot_scale = 1, cairo = TRUE, font = ""),
                        width = 6, height = 4
   )
 
   expect_snapshot_plot("large size base R",
-                       p + theme_cr(base_scale = 1.5, cairo = TRUE, font = ""),
+                       p + theme_cr(plot_scale = 1.5, cairo = TRUE, font = ""),
                        width = 9, height = 6
   )
 
   expect_snapshot_plot("largest size base R",
-                       p + theme_cr(base_scale = 2, cairo = TRUE, font = ""),
+                       p + theme_cr(plot_scale = 2, cairo = TRUE, font = ""),
                        width = 12, height = 8
   )
 

@@ -9,8 +9,8 @@
 #' \code{theme_gray} function with the function-specified components, resulting
 #' in a completely custom theme. It uses the packaged fonts by default.
 #'
-#' @param base_scale Scaling factor for the plot as a whole. A value of 1
-#'   corresponds to a font size of 12 pt and a figure size of 6" by 4"
+#' @param plot_scale Scaling factor for the plot components as a whole. A value
+#'   of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"
 #' @param font_scale Scaling factor for the font as compared to the plot. A
 #'   value of 1 will scale the font to the plot size. Larger numbers make the
 #'   font large compared to the plot size; smaller numbers make the font small
@@ -45,12 +45,12 @@
 #'\dontrun{
 #' p + theme_cr() # Uses default scaling and font
 #' p + theme_cr(font = "Roboto Medium") # Bolder font
-#' p + theme_cr(base_scale = 2) # Multiply height and width of the plot by 2
+#' p + theme_cr(plot_scale = 2) # Multiply height and width of the plot by 2
 #' p + theme_cr(font = "Roboto Medium", symbol = FALSE) # Use system Symbol font
 #' p + theme_cr(font = "Avenir", cairo = TRUE) # Use a cairo-safe font
 #'}
 
-theme_cr <- function(base_scale = 1, font_scale = 1,
+theme_cr <- function(plot_scale = 1, font_scale = 1,
                      font = "Roboto Regular", symbol = TRUE, cairo = FALSE) {
 
   # Import fonts from the font folder
@@ -69,7 +69,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
   }
 
   # Define sizing based on input scale
-  base_size <- base_scale*12
+  base_size <- plot_scale*12
   base_line_size <- base_size/50
   base_rect_size <- base_size/50
 
@@ -82,7 +82,7 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
 
   # Update the geom sizes based on the plot scaling, update color
   geom_scaling(
-    scale_factor = base_scale,
+    scale_factor = plot_scale,
     font = font,
     base_colour = base_colour
   )
@@ -271,8 +271,8 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
 #' so it can be applied on top of pre-existing theme modifications (e.g.,
 #' the \code{\link{theme_cut}()} functions).
 #'
-#' @param base_scale Scaling factor for the plot as a whole. A value of 1
-#'   corresponds to a font size of 12 pt and a figure size of 6" by 4"
+#' @param plot_scale Scaling factor for the plot components as a whole. A value
+#'   of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"
 #' @param font_scale Scaling factor for the font as compared to the plot. A
 #'   value of 1 will scale the font to the plot size. Larger numbers make the
 #'   font large compared to the plot size; smaller numbers make the font small
@@ -298,19 +298,19 @@ theme_cr <- function(base_scale = 1, font_scale = 1,
 #' p + theme_cr() # Uses default scaling and font
 #'
 #' # Multiply height and width of the plot by 2
-#' p + theme_cr() + apply_scaling(base_scale = 2)
+#' p + theme_cr() + apply_scaling(plot_scale = 2)
 #'
 #' # Divide height and width of plot by 2 but keep original font size
-#' p + theme_cr() + apply_scaling(base_scale = 0.5, font_scale = 2)
+#' p + theme_cr() + apply_scaling(plot_scale = 0.5, font_scale = 2)
 #'
-#' # Multiply height and wdith of the plot by 2 but do not change the margins
-#' p + theme_cr() + apply_scaling(base_scale = 2, set_margin = FALSE)
+#' # Multiply height and width of the plot by 2 but do not change the margins
+#' p + theme_cr() + apply_scaling(plot_scale = 2, set_margin = FALSE)
 #'}
 
-apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
+apply_scaling <- function(plot_scale = 1, font_scale = 1, set_margin = TRUE) {
 
   # Define sizing based on input scale
-  base_size <- base_scale*12
+  base_size <- plot_scale*12
   base_line_size <- base_size/50
   base_rect_size <- base_size/50
 
@@ -318,7 +318,7 @@ apply_scaling <- function(base_scale = 1, font_scale = 1, set_margin = TRUE) {
   font_size <- base_size*font_scale
 
   # Update the geom sizes based on the plot scaling, update color
-  geom_scaling(scale_factor = base_scale)
+  geom_scaling(scale_factor = plot_scale)
 
   scaled_theme <- theme(
     line = element_line(linewidth = base_line_size),

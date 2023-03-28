@@ -105,10 +105,10 @@ test_that("theme and save scaling interact correctly", {
     geom_point()
 
   expect_snapshot_crplot("scaled up theme and save",
-    p + theme_cr(base_scale = 2), "png", base_scale = 2
+    p + theme_cr(plot_scale = 2), "png", width = 12
   )
 
   expect_snapshot_crplot("scaled down theme and save, large font",
-    p + theme_cr(base_scale = 0.5, font_scale = 2), "png", base_scale = 0.5
+    p + theme_cr(plot_scale = 0.5, font_scale = 2), "png", width = 3
   )
 })

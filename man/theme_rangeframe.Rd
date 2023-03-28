@@ -5,7 +5,7 @@
 \title{Theme modification when using geom_rangeframe}
 \usage{
 theme_rangeframe(
-  base_scale = 1,
+  plot_scale = 1,
   font_scale = 1,
   font = "Roboto Regular",
   symbol = TRUE,
@@ -13,8 +13,8 @@ theme_rangeframe(
 )
 }
 \arguments{
-\item{base_scale}{Scaling factor for the plot as a whole. A value of 1
-corresponds to a font size of 12 pt and a figure size of 6" by 4"}
+\item{plot_scale}{Scaling factor for the plot components as a whole. A value
+of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
 \item{font_scale}{Scaling factor for the font as compared to the plot. A
 value of 1 will scale the font to the plot size. Larger numbers make the

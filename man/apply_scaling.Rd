@@ -4,11 +4,11 @@
 \alias{apply_scaling}
 \title{Size scaling for plots with customized theme}
 \usage{
-apply_scaling(base_scale = 1, font_scale = 1, set_margin = TRUE)
+apply_scaling(plot_scale = 1, font_scale = 1, set_margin = TRUE)
 }
 \arguments{
-\item{base_scale}{Scaling factor for the plot as a whole. A value of 1
-corresponds to a font size of 12 pt and a figure size of 6" by 4"}
+\item{plot_scale}{Scaling factor for the plot components as a whole. A value
+of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
 \item{font_scale}{Scaling factor for the font as compared to the plot. A
 value of 1 will scale the font to the plot size. Larger numbers make the
@@ -38,12 +38,12 @@ p <- ggplot(df, aes(x, y, color = z)) + geom_point()
 p + theme_cr() # Uses default scaling and font
 
 # Multiply height and width of the plot by 2
-p + theme_cr() + apply_scaling(base_scale = 2)
+p + theme_cr() + apply_scaling(plot_scale = 2)
 
 # Divide height and width of plot by 2 but keep original font size
-p + theme_cr() + apply_scaling(base_scale = 0.5, font_scale = 2)
+p + theme_cr() + apply_scaling(plot_scale = 0.5, font_scale = 2)
 
-# Multiply height and wdith of the plot by 2 but do not change the margins
-p + theme_cr() + apply_scaling(base_scale = 2, set_margin = FALSE)
+# Multiply height and width of the plot by 2 but do not change the margins
+p + theme_cr() + apply_scaling(plot_scale = 2, set_margin = FALSE)
 }
 }

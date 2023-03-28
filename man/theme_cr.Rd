@@ -5,7 +5,7 @@
 \title{Base customized theme}
 \usage{
 theme_cr(
-  base_scale = 1,
+  plot_scale = 1,
   font_scale = 1,
   font = "Roboto Regular",
   symbol = TRUE,
@@ -13,8 +13,8 @@ theme_cr(
 )
 }
 \arguments{
-\item{base_scale}{Scaling factor for the plot as a whole. A value of 1
-corresponds to a font size of 12 pt and a figure size of 6" by 4"}
+\item{plot_scale}{Scaling factor for the plot components as a whole. A value
+of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
 \item{font_scale}{Scaling factor for the font as compared to the plot. A
 value of 1 will scale the font to the plot size. Larger numbers make the
@@ -60,7 +60,7 @@ p <- ggplot(df, aes(x, y, color = z)) + geom_point()
 \dontrun{
 p + theme_cr() # Uses default scaling and font
 p + theme_cr(font = "Roboto Medium") # Bolder font
-p + theme_cr(base_scale = 2) # Multiply height and width of the plot by 2
+p + theme_cr(plot_scale = 2) # Multiply height and width of the plot by 2
 p + theme_cr(font = "Roboto Medium", symbol = FALSE) # Use system Symbol font
 p + theme_cr(font = "Avenir", cairo = TRUE) # Use a cairo-safe font
 }

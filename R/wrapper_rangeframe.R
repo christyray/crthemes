@@ -58,20 +58,21 @@ geom_rangeframe_cr <- function(xlim, ylim, ...) {
 #' p + theme_rangeframe()
 #'}
 
-theme_rangeframe <- function(base_scale = 1, font_scale = 1,
+theme_rangeframe <- function(plot_scale = 1, font_scale = 1,
                              font = "Roboto Regular", symbol = TRUE,
                              cairo = FALSE) {
 
-    # Define sizing based on input scale
-  base_size <- base_scale*12
+  # Define sizing based on input scale
+  base_size <- plot_scale*12
 
   # Apply the font scale to the font size
   font_size <- base_size*font_scale
 
-  theme_cr(base_scale = base_scale, font_scale = font_scale, font = font,
+  theme_cr(plot_scale = plot_scale, font_scale = font_scale, font = font,
            symbol = symbol, cairo = cairo) +
-    theme(axis.line = element_blank(),
-          axis.ticks = element_line(linewidth = base_scale*0.5),
-          axis.ticks.length = unit(font_size/2, "pt")
+    theme(
+      axis.line = element_blank(),
+      axis.ticks = element_line(linewidth = plot_scale*0.5),
+      axis.ticks.length = unit(font_size/2, "pt")
     )
 }

@@ -4,11 +4,11 @@
 \alias{heatmap_legend}
 \title{Legend theme and appearance tweaking for heatmaps}
 \usage{
-heatmap_legend(base_scale = 1, font = "Roboto Regular")
+heatmap_legend(plot_scale = 1, font = "Roboto Regular")
 }
 \arguments{
-\item{base_scale}{Scaling factor for the plot as a whole. A value of 1
-corresponds to a font size of 12 pt and a figure size of 6" by 4"}
+\item{plot_scale}{Scaling factor for the plot components as a whole. A value
+of 1 corresponds to a font size of 12 pt and a figure size of 6" by 4"}
 
 \item{font}{Font family to be used in the theme, given as a character vector.
 The font must be included in the theme fonts; use
