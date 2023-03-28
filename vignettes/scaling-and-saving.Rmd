@@ -62,37 +62,41 @@ p + theme_cr(plot_scale = 1, font_scale = 0.75)
 
 ## `crsave()`
 
-The `base_scale` and `font_scale` arguments of `theme_cr()` are designed to be used alongside the `crsave()` function. `crsave()` is a wrapper for [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html) with my preferred graphics devices specified as defaults. 
+The `plot_scale` and `font_scale` arguments of `theme_cr()` are designed to be used alongside the `crsave()` function to finesse the size of plot components and the final rendered image size. `crsave()` is a wrapper for [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html) with my preferred graphics devices specified as defaults. 
 
-### Figure Scaling with `base_scale`
+### The `scaling` argument
 
-The `base_scale` argument corresponds to the `base_scale` argument of the `theme_cr()` function, and it will determine the size of the saved figure unless a value is provided for the `width` argument. The theme is designed for the two arguments to be set to the same value, so the plot features scale appropriately with the size of the plot.
+Saving rendered images at the desired size and resolution is a tricky business in T. [This `tidyverse` blog post](https://www.tidyverse.org/blog/2020/08/taking-control-of-plot-scaling/) goes into more detail about the different approaches to plot scaling and the pros and cons of each approach. It also explains the methodology behind the `scaling` argument in the `ragg` graphics devices from the [`ragg` package](https://ragg.r-lib.org/). 
 
-The table below gives some common scaling factors and the figure size in inches they correspond to. 
+The `crsave()` function accepts a `scaling` argument that it then passes to the `ragg` graphics devices if they are being used (the default behavior). The size of every printed component in the image (e.g., points, lines, text, etc.) is essentially then multiplied by this scaling factor to scale up or down the image. 
 
-| Scale Factor | Plot Width | Plot Height |
-|:------------:|:----------:|:-----------:|
-| 0.5          | 3          | 2           |
-| 0.75         | 4.5        | 3           |
-| 1            | 6          | 4           |
-| 1.5          | 9          | 6           |
-| 2            | 12         | 8           |
+The `scaling` argument allows the image to either (1) be resized up or down without changing the relative sizes of the individual plot components, or (2) scale up or down the components of the figure relative to the image size.
 
-Note that it is not required that the plot size correspond with `base_scale` value used in `theme_cr()`. For example, for larger plot features, you can use a larger `base_scale` value in `theme_cr()` without changing the save of the saved plot in `crsave()`. This will increase the size of the plot features relative to the figure size. 
+To resize the image without changing the relative sizes of the plot components, set the scaling factor to the amount the image should be scaled by, and multiply the width of the image by that same factor. For example, to double the size of a 6" x 4" figure without changing the general appearance of the data, set `scaling = 2` and `width = 12`. 
 
-The aspect ratio of the plot is set with the `ratio` argument, given as the ratio of the figure width to the figure height. The height of the plot is calculated from the `base_scale` value and the `ratio`.
+To scale the image components relative to the image size, set the scaling factor to the amount the components should be scaled by without changing the size of the image width. `scaling` > 1 will increase the size of the figure components, and `scaling` < 1 will decrease their size. 
 
 ```{r, eval=FALSE}
 # Save the plot object in p with the default settings, defaults to PNG
 crsave(p)
 
 # Scale up the plot to a 12" by 8" figure
-crsave(p, path = "figure.png", base_scale = 2)
+crsave(p, path = "figure.png", width = 12, scaling = 2)
 ```
 
-### Figure Scaling with `width`
+### Overall Figure Sizing and Scaling
 
-Alternatively, the plot size can be specified directly with the `width` and `units` arguments. In this case, the figure uses the aspect ratio given in `ratio` and the `width` value to set the dimensions of the plot. The `units` argument can be given any unit supported by [`grid::unit()`](https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/unit).
+The most straightforward approach to create figures that are scaled correctly is to first create the figure in R with the `plot_scale` argument of `theme_cr()` set to `1`. With the initial figure creation, determine if any individual aspects of the plot need to be resized relative to the other plot components, and adjust those aspects with the `geom_*()`, `scale_*()`, and `theme()` functions as needed. If the size of the text overall needs adjustment, use the `font_scale` argument of `theme_cr()`. 
+
+After figure is created and the individual components are sized correctly relative to each other in R, the figure can be exported with the `crsave()` function. The next step is to determine the width and aspect ratio for the figure that appears best with the size of the figure components. The approach here is to iteratively tweak the `width` and `ratio` arguments of `crsave()` until the desired figure appearance is reached. 
+
+If the figure is being used alongside previously generated figures and needs to match the relative size of the components in those images, the `plot_scale()` argument of `theme_cr()` can be used to adjust the size of most of the plot components accordingly. This is easiest to use for small adjustments; for any substantial changes in the image scale, use the `scaling` argument of `crsave()`.
+
+The `scaling` argument of `crsave()` is primarily for resizing an existing figure that has already been formatted to the desired appearance. It applies a scaling factor to the entire image, so the `scaling` argument can be used along with the `width` argument to quickly upscale a figure from a presentation to be the correct size for a poster or downscale a figure to make a thumbnail for a website. 
+
+### Image Width and Aspect Ratio
+
+The aspect ratio of the plot is set with the `ratio` argument, given as the ratio of the figure width to the figure height. The height of the plot is calculated from the `width` value and the `ratio`. The `units` argument determines what units are used for the image height and width and can be given any unit supported by [`grid::unit()`](https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/unit).
 
 ```{r, eval=FALSE}
 # Save the plot as a 4" by 4" figure

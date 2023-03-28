@@ -1,5 +1,10 @@
 # crthemes (Development Version)
 
+- Added `"errorbar"`, `"crossbar"`, `"linerange"`, and `"pointrange"` to the list of geoms that are automatically scaled based on the theme scale factor
+- Changed the name of the theme scale factor argument from `base_scale` to `plot_scale` for better clarity
+- Updated the image scaling in the `crsave()` function to use the `scaling` argument from the `ragg` package and to be handled more intuitively overall
+    - The standard approach should now be to use `plot_scale` in `theme_cr()` to handle making the plot look reasonable inside R, and then to use `width`, `ratio`, and `scaling` to export the image at the desired sizing
+
 # crthemes 0.1.1 (2023-02-21)
 
 - Hotfix to incorporate necessary changes after updating to `tidyselect` v1.2.0 and `ggplot2` v3.4.0

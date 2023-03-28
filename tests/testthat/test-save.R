@@ -94,7 +94,7 @@ test_that("aspect ratio, width, and scaling are applied", {
 
   expect_snapshot_crplot("different width, wider", p, "png", width = 9)
   expect_snapshot_crplot("different ratio, square", p, "png", ratio = 1)
-  expect_snapshot_crplot("different scale, smaller", p, "png", base_scale = 0.5)
+  expect_snapshot_crplot("different scale, smaller", p, "png", scaling = 0.5)
   expect_snapshot_crplot("different units, smaller", p, "png", units = "cm")
   expect_snapshot_crplot("different resolution, worse", p, "png", dpi = 100)
 })
@@ -111,4 +111,9 @@ test_that("theme and save scaling interact correctly", {
   expect_snapshot_crplot("scaled down theme and save, large font",
     p + theme_cr(plot_scale = 0.5, font_scale = 2), "png", width = 3
   )
+
+  expect_snapshot_crplot("scaled up plot with ragg",
+    p + theme_cr(plot_scale = 1), "png", width = 12, scaling = 2
+  )
+
 })

@@ -27,7 +27,7 @@ Imports:
     rlang,
     farver,
     magrittr,
-    ragg,
+    ragg (>= 1.2.0),
     svglite,
     grDevices,
     ggthemes

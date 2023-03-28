@@ -9,8 +9,8 @@ crsave(
   path = NULL,
   type = NULL,
   device = NULL,
-  base_scale = 1,
-  width = NULL,
+  scaling = 1,
+  width = 6,
   ratio = 1.5,
   units = "in",
   dpi = 600,
@@ -29,10 +29,11 @@ extension or \code{PNG} if no type or extension given}
 \item{device}{Which graphics device to use for saving; uses default devices
 for main file types}
 
-\item{base_scale}{Scaling factor for the plot output, used to change the size
-of the saved figure based on the scaling applied to the theme elements;
-only applied if the \code{width} is not provided, otherwise, the \code{width} is
-used; factor of 1 corresponds to a 6" x 4" image}
+\item{scaling}{Scaling factor for the plot output, used to change the scaling
+of the entire rendered figure; specifically useful for resizing figures
+without altering relative image appearance or resolution; factor of 1
+corresponds to a 6" x 4" image with 12 pt font; corresponds to the
+\code{scaling} argument in the \code{\link[ragg]{ragg}} package}
 
 \item{width}{Width of plot image; default is 6"}
 
