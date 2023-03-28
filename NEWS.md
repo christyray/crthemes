@@ -1,3 +1,5 @@
+# crthemes (Development Version)
+
 # crthemes 0.1.2 (2023-03-28)
 
 - Added `"errorbar"`, `"crossbar"`, `"linerange"`, and `"pointrange"` to the list of geoms that are automatically scaled based on the theme scale factor

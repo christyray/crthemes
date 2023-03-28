@@ -1,6 +1,6 @@
 Package: crthemes
 Title: A Standardized ggplot2 Theme for Visualizations
-Version: 0.1.2
+Version: 0.1.2.9000
 Authors@R:
     person("Christy", "Ray", , "christyray@jhmi.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7552-9759"))
